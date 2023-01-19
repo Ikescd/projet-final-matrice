@@ -34,11 +34,11 @@ const Layout = (props) => {
 };
 
 const UnderConstruction = () => {
-	return <>En construction</>;
+	return <>Site en construction, revenez plus tard.</>;
 };
 
 const NotFound = () => {
-	return <>Page not found</>;
+	return <>Page not found !</>;
 };
 
 const Homepage = () => {
