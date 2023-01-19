@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import ProductDetails from './Views/Products/ProductDetails';
+import Products from './Views/Products/Products';
 
 function App() {
 	return (
@@ -14,8 +16,8 @@ function App() {
 
 					<Route path='/profile' element={<UnderConstruction />} />
 
-					<Route path='/products' element={<UnderConstruction />} />
-					<Route path='/products/:id' element={<UnderConstruction />} />
+					<Route path='/products' element={<Products />} />
+					<Route path='/products/:id' element={<ProductDetails />} />
 
 					<Route path='/cart' element={<UnderConstruction />} />
 					<Route path='/orders' element={<UnderConstruction />} />

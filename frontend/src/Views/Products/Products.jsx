@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
 
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import TablePagination from "@mui/material/TablePagination";
+import Link from "@mui/material/Link";
 
 export default function Products() {
   const { products } = require("../../Helpers/FakeData.js");
@@ -21,7 +23,6 @@ export default function Products() {
 
   return (
     <div>
-      Products
       <Box
         sx={{
           display: "flex",
@@ -32,13 +33,26 @@ export default function Products() {
       >
         {products.map((product) => (
           <Card sx={{ margin: 2, maxWidth: 345 }} key={product.product_id}>
-            <CardMedia component="img" height="140" image={product.picture} />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {product.name}
-              </Typography>
-              <Typography>{(product.price / 100).toFixed(2)} €</Typography>
-            </CardContent>
+            <Link
+              component={RouterLink}
+              to={`/products/${product.product_id}`}
+              underline="none"
+            >
+              <CardMedia component="img" height="140" image={product.picture} />
+              <CardContent>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  color="text.primary"
+                  component="div"
+                >
+                  {product.name}
+                </Typography>
+                <Typography variant="body2" color="text.primary">
+                  {(product.price / 100).toFixed(2)} €
+                </Typography>
+              </CardContent>
+            </Link>
           </Card>
         ))}
         <TablePagination
