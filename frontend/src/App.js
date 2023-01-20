@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 
+import Cart from './Views/Cart/Cart';
+
 function App() {
 	return (
 		<Router>
@@ -17,7 +19,7 @@ function App() {
 					<Route path='/products' element={<UnderConstruction />} />
 					<Route path='/products/:id' element={<UnderConstruction />} />
 
-					<Route path='/cart' element={<UnderConstruction />} />
+					<Route path='/cart' element={<Cart />} />
 					<Route path='/orders' element={<UnderConstruction />} />
 					<Route path='/orders/:id' element={<UnderConstruction />} />
 
@@ -42,6 +44,12 @@ const NotFound = () => {
 };
 
 const Homepage = () => {
-	return <>Bienvenue sur le site de Recycle-RAT</>;
+	return (
+		<>
+			Bienvenue sur le site de Recycle-RAT
+			<a href='/cart'>Le panier</a>
+		</>
+	);
 };
+
 export default App;

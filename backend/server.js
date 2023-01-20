@@ -27,10 +27,13 @@ const connection = mysql.createConnection(connectionOptions);
 connection.connect();
 
 app.get('/', (req, res) => {
-	console.log('oui');
 	res.send('oui');
 });
 
+app.get('/users', (req, res) => {
+	console.log('les users');
+	res.send('les users');
+});
 app.listen(3000, () => {
 	console.log('bien connecté');
 });

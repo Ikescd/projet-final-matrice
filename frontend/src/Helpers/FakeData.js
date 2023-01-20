@@ -106,3 +106,16 @@ const products = [
 ];
 
 const orders = [];
+
+const cart = [
+	{
+		product: products[0],
+		quantityBuy: 3,
+	},
+	{
+		product: products[1],
+		quantityBuy: 2,
+	},
+];
+
+module.exports = { users, cart, categories, products, orders };
