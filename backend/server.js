@@ -4,10 +4,12 @@ const mysql = require('mysql');
 require('dotenv').config();
 const cors = require('cors');
 
+const productsRoutes = require('./routes/products/productsRoutes');
+
 const corsOptions = {
 	origin: '*',
-	credentials: true,
-	optionSuccessStatus: 200,
+  credentials: true,
+  optionSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
@@ -31,8 +33,11 @@ app.get('/', (req, res) => {
 	res.send('oui');
 });
 
-app.listen(3000, () => {
-	console.log('bien connecté');
+
+productsRoutes(app, connection);
+
+app.listen(port, () => {
+  console.log(`bien connecté au port ${port}`);
 });
 
 // const express = require('express');
