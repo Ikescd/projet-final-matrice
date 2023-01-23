@@ -41,7 +41,7 @@ export default function Products() {
         }}
       >
         {products.map((product) => (
-          <Card sx={{ margin: 2, maxWidth: 345 }} key={product.id}>
+          <Card sx={{ margin: 2, width: 345 }} key={product.id}>
             <Link
               component={RouterLink}
               to={`/products/${product.id}`}
@@ -64,15 +64,16 @@ export default function Products() {
             </Link>
           </Card>
         ))}
-        <TablePagination
-          component="div"
-          count={100}
-          page={page}
-          onPageChange={handleChangePage}
-          rowsPerPage={rowsPerPage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
       </Box>
+      <TablePagination
+        sx={{ mx: "auto" }}
+        component="div"
+        count={100}
+        page={page}
+        onPageChange={handleChangePage}
+        rowsPerPage={rowsPerPage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
     </div>
   );
 }

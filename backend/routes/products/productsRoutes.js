@@ -22,7 +22,42 @@ function productsRoutes(app, db) {
   });
 
   //Create product
-  app.post("/api/products", async (req, res) => {});
+  app.post("/api/products", async (req, res) => {
+    if (
+      req.body.name &&
+      req.body.description &&
+      req.body.price &&
+      req.body.quantityInStock &&
+      req.body.picture
+    ) {
+      const name = req.body.name;
+      const description = req.body.description;
+      const price = req.body.price;
+      const quantityInStock = req.body.quantityInStock;
+      const picture = req.body.picture;
+      const item_code = req.body.item_code;
+      const category_id = req.body.category;
+
+      const responseDB = await db.query(
+        "INSERT INTO products (name, description, price, quantityInStock, picture, item_code, category_id) VALUES (?,?,?,?,?,?,?)",
+        [
+          name,
+          description,
+          price,
+          quantityInStock,
+          picture,
+          item_code,
+          category_id,
+        ],
+        (err, result) => {
+          if (err) throw err;
+          res.json({ status: 200, result });
+        }
+      );
+    } else {
+      res.sendStatus(422);
+    }
+  });
 
   // Update product
   app.put("/api/products/:id", async (req, res) => {});
