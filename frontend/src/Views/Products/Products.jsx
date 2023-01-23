@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
@@ -6,8 +6,17 @@ import TablePagination from "@mui/material/TablePagination";
 import Link from "@mui/material/Link";
 
 export default function Products() {
-  const { products } = require("../../Helpers/FakeData.js");
-  // const [products, setProducts] = useState([]);
+  // const { products } = require("../../Helpers/FakeData.js");
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/products")
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data.result);
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   const [page, setPage] = useState(2);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -32,10 +41,10 @@ export default function Products() {
         }}
       >
         {products.map((product) => (
-          <Card sx={{ margin: 2, maxWidth: 345 }} key={product.product_id}>
+          <Card sx={{ margin: 2, maxWidth: 345 }} key={product.id}>
             <Link
               component={RouterLink}
-              to={`/products/${product.product_id}`}
+              to={`/products/${product.id}`}
               underline="none"
             >
               <CardMedia component="img" height="140" image={product.picture} />

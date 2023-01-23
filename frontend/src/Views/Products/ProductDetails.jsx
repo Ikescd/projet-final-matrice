@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link as RouterLink } from "react-router-dom";
 
 import { Box, Button, Grid, Typography } from "@mui/material";
@@ -8,10 +8,22 @@ import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import Modal from "@mui/material/Modal";
 
 export default function ProductDetails() {
-  const { products } = require("../../Helpers/FakeData.js");
+  // const { products } = require("../../Helpers/FakeData.js");
 
-  const { id } = useParams();
-  const product = products[id - 1];
+  // const { id } = useParams();
+  // const product = products[id - 1];
+
+  const [product, setProduct] = useState([]);
+  const params = useParams();
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/products/${params.id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setProduct(data.result[0]);
+      })
+      .catch((err) => console.error(err));
+  }, [params.id]);
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
