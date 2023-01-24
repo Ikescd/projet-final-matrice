@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-d
 import ProductDetails from './Views/Products/ProductDetails';
 import Products from './Views/Products/Products';
 
+import Cart from './Views/Cart/Cart';
+
 function App() {
 	return (
 		<Router>
@@ -19,7 +21,7 @@ function App() {
 					<Route path='/products' element={<Products />} />
 					<Route path='/products/:id' element={<ProductDetails />} />
 
-					<Route path='/cart' element={<UnderConstruction />} />
+					<Route path='/cart' element={<Cart />} />
 					<Route path='/orders' element={<UnderConstruction />} />
 					<Route path='/orders/:id' element={<UnderConstruction />} />
 
@@ -44,6 +46,12 @@ const NotFound = () => {
 };
 
 const Homepage = () => {
-	return <>Bienvenue sur le site de Recycle-RAT</>;
+	return (
+		<>
+			Bienvenue sur le site de Recycle-RAT
+			<a href='/cart'>Le panier</a>
+		</>
+	);
 };
+
 export default App;
