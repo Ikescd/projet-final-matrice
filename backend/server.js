@@ -6,6 +6,8 @@ const mysql = require('mysql');
 
 const cors = require('cors');
 
+const usersRoutes = require ('./routes/usersRoutes')
+
 const corsOptions = {
 	origin: '*',
 	credentials: true,
@@ -16,13 +18,14 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 const connectionOptions = {
 	host: 'localhost',
 	database: 'recycle_rat',
 	user: 'root',
-	password: '',
+	password: process.env.DB_PASSWORD,
+	port: process.env.DB_PORT
 };
 
 const connection = mysql.createConnection(connectionOptions);
@@ -32,13 +35,20 @@ app.get('/', (req, res) => {
 	res.send('oui');
 });
 
-app.get('/users', (req, res) => {
-	connection.query('SELECT * FROM users', (err, result) => {
-		if (err) return res.sendStatus(400);
-		return res.send(result);
-	});
-});
+usersRoutes(app, connection)
 
-app.listen(3000, () => {
+// app.get("/api/users", (req, res) => {
+// 	 connection.query(
+// 	  `SELECT * FROM users`,
+// 	  (err, result) => {
+// 		// if (err) throw err;
+// 		// console.log(result);
+// 		return res.status(200).json(result);
+// 	  }
+// 	);
+//   });
+
+
+app.listen(port, () => {
 	console.log('bien connecté');
 });
