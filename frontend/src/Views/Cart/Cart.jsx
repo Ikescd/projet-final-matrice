@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Button, Link, Typography } from '@mui/material';
-
 import CartList from './CartList';
-
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 function Cart() {
@@ -28,14 +26,14 @@ function Cart() {
 		);
 	};
 
-	const removeProduct = (/*product*/) => {
+	const removeProduct = (productId) => {
 		console.log('remove');
-		// setProductDetails((prevProducts) => prevProducts.filter((prod) => prod.id !== product));
-		// setCart(cart.filter((prod) => prod.product !== product));
+
+		setCart(cart.filter((prod) => prod.product_id !== productId));
 	};
 
 	return (
-		<Box sx={{ width: '75%', margin: '50px auto' }}>
+		<Box sx={{ margin: '50px auto' }}>
 			<Box id='goToHomepage'>
 				<Link href='/' sx={{ display: 'flex' }}>
 					<KeyboardArrowLeftIcon />
@@ -51,13 +49,14 @@ function Cart() {
 				{!isLoading && <CartList cart={cart} onUpdate={updateProduct} onRemove={removeProduct} />}
 
 				{isLoading && <Typography>Chargement de votre panier...</Typography>}
+
 				{!isLoading && cart.length == 0 && (
 					<Typography>
 						Il n'y a rien dans votre panier. Voulez-vous faire quelques achats ?
 					</Typography>
 				)}
 
-				<Button>Passer la commande</Button>
+				<Button href='/to-order'>Passer la commande</Button>
 			</Box>
 		</Box>
 	);

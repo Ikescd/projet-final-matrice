@@ -18,23 +18,28 @@ export default function CartList(props) {
 		<Table>
 			<TableHead>
 				<TableRow>
-					<TableCell colSpan={2}>Produit</TableCell>
-					<TableCell>Quantité</TableCell>
-					<TableCell>Prix total</TableCell>
+					<TableCell colSpan={2} sx={{ textAlign: 'center' }}>
+						<Typography>Produit</Typography>
+					</TableCell>
+					<TableCell sx={{ width: 150, textAlign: 'center' }}>
+						<Typography>Quantité</Typography>
+					</TableCell>
+					<TableCell sx={{ textAlign: 'right' }}>
+						<Typography>Prix</Typography>
+					</TableCell>
 				</TableRow>
 			</TableHead>
 
 			<TableBody>
-				{cart.map((el) => {
+				{cart.map((element) => {
 					return (
-						<TableRow key={el.product_id}>
-							<CartDetails
-								id={el.product_id}
-								onUpdate={onUpdate}
-								onRemove={onRemove}
-								productCart={el}
-							></CartDetails>
-						</TableRow>
+						<CartDetails
+							key={element.product_id}
+							id={element.product_id}
+							onUpdate={onUpdate}
+							onRemove={onRemove}
+							productCart={element}
+						/>
 					);
 				})}
 			</TableBody>
