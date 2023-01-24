@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import ProductDetails from './Views/Products/ProductDetails';
 import Products from './Views/Products/Products';
+import Categories from './Views/Categories/Categories';
+import CategoryDetails from './Views/Categories/CategoryDetails';
 
 import Cart from './Views/Cart/Cart';
 
@@ -20,6 +22,7 @@ function App() {
 
 					<Route path='/products' element={<Products />} />
 					<Route path='/products/:id' element={<ProductDetails />} />
+					<Route path='/categories/:id' element={<CategoryDetails />} />
 
 					<Route path='/cart' element={<Cart />} />
 					<Route path='/orders' element={<UnderConstruction />} />
@@ -50,6 +53,8 @@ const Homepage = () => {
 		<>
 			Bienvenue sur le site de Recycle-RAT
 			<a href='/cart'>Le panier</a>
+			<Categories />
+			<Products />
 		</>
 	);
 };
