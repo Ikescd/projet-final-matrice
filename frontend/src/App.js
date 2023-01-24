@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 
 import Cart from './Views/Cart/Cart';
+import Login from './Views/User/Login';
+import SignUp from './Views/User/SignUp';
 
 function App() {
 	return (
@@ -10,8 +12,8 @@ function App() {
 				<Routes>
 					<Route path='/' element={<Homepage />} />
 
-					<Route path='/login' element={<UnderConstruction />} />
-					<Route path='/signup' element={<UnderConstruction />} />
+					<Route path='/login' element={<Login />} />
+					<Route path='/signup' element={<SignUp />} />
 					<Route path='/passwordReset' element={<UnderConstruction />} />
 
 					<Route path='/profile' element={<UnderConstruction />} />

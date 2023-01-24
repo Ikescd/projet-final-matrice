@@ -37,18 +37,6 @@ app.get('/', (req, res) => {
 
 usersRoutes(app, connection)
 
-// app.get("/api/users", (req, res) => {
-// 	 connection.query(
-// 	  `SELECT * FROM users`,
-// 	  (err, result) => {
-// 		// if (err) throw err;
-// 		// console.log(result);
-// 		return res.status(200).json(result);
-// 	  }
-// 	);
-//   });
-
-
 app.listen(port, () => {
 	console.log('bien connecté');
 });
