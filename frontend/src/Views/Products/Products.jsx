@@ -63,7 +63,7 @@ export default function Products() {
               <CardContent
                 sx={{
                   bgcolor: "#ECF0C6",
-                  minHeight: "90px",
+                  minHeight: "95px",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",

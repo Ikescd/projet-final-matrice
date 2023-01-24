@@ -59,17 +59,21 @@ function productsRoutes(app, db) {
     }
   });
 
+  /*
+  TODO : creation des routes pour supprimer ou modifier un produit
+  
   // Update product
   app.put("/api/products/:id", async (req, res) => {});
 
   // Delete product
   app.delete("/api/products/:id", async (req, res) => {
     const id = req.params.id;
-    const responseDB = await db.query(`DELETE FROM products WHERE id = ?`, [
-      id,
-    ]);
-    res.json({ status: 200, responseDB });
+    // const responseDB = await db.query(`DELETE FROM products WHERE id = ?`, [
+    //   id,
+    // ]);
+    // res.json({ status: 200, responseDB });
   });
+  */
 }
 
 module.exports = productsRoutes;
