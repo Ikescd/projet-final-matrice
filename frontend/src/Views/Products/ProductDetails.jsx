@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link as RouterLink } from "react-router-dom";
 
-import { Box, Button, Grid, Typography } from "@mui/material";
-import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
+import {
+  Box,
+  Button,
+  Grid,
+  Link,
+  Modal,
+  TextField,
+  Typography,
+} from "@mui/material";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
-import Modal from "@mui/material/Modal";
 
 export default function ProductDetails() {
   // const { products } = require("../../Helpers/FakeData.js");
@@ -47,7 +52,7 @@ export default function ProductDetails() {
     p: 4,
   };
 
-  const styleModalButton = {
+  const styleButton = {
     m: 1,
     bgcolor: "#117A5D",
     ":hover": {
@@ -80,7 +85,7 @@ export default function ProductDetails() {
           alignItems: "flex-start",
         }}
       >
-        <Box sx={{ mx: 2 }}>
+        <Box sx={{ mx: 2, color: "#117A5D" }}>
           <Link
             component={RouterLink}
             to={"/"}
@@ -92,7 +97,11 @@ export default function ProductDetails() {
                 <ArrowCircleLeftIcon />
               </Grid>
               <Grid>
-                <Typography>Retour à l'accueil</Typography>
+                <Typography
+                  sx={{ color: "#117A5D", fontFamily: "Time new roman" }}
+                >
+                  Retour à l'accueil
+                </Typography>
               </Grid>
             </Grid>
           </Link>
@@ -104,19 +113,26 @@ export default function ProductDetails() {
               height: "auto",
               width: "340px",
               marginRight: "5px",
+              borderRadius: "5px",
+              border: "1px solid #117A5D",
             }}
           />
         </Box>
 
-        <Box sx={{ mx: 2 }}>
-          <Typography variant="h6" sx={{ my: 1, pt: 3 }}>
+        <Box sx={{ mx: 2, color: "#117A5D" }}>
+          <Typography
+            variant="h6"
+            sx={{ my: 1, pt: 3, fontFamily: "Time new roman" }}
+          >
             {product.name}
           </Typography>
-          <Typography variant="h6" sx={{ my: 1 }}>
+          <Typography variant="h6" sx={{ my: 1, fontFamily: "Time new roman" }}>
             {(product.price / 100).toFixed(2)} €
           </Typography>
 
-          <Typography sx={{ minWidth: 300, maxWidth: 500 }}>
+          <Typography
+            sx={{ minWidth: 300, maxWidth: 500, fontFamily: "Time new roman" }}
+          >
             {product.description}
           </Typography>
           <TextField
@@ -129,10 +145,15 @@ export default function ProductDetails() {
             InputLabelProps={{
               shrink: true,
             }}
-            sx={{ my: 1 }}
+            sx={{
+              my: 1,
+              input: { color: "#117A5D", fontFamily: "Time new roman" },
+              label: { color: "#117A5D", fontFamily: "Time new roman" },
+              fieldset: { borderColor: "#117A5D" },
+            }}
           />
 
-          <Button type="submit" variant="contained" sx={{ my: 1, mx: 3 }}>
+          <Button sx={styleButton} type="submit" variant="contained">
             Ajouter au panier
           </Button>
         </Box>
@@ -155,13 +176,13 @@ export default function ProductDetails() {
           </Box>
           <Box>
             <Link component={RouterLink} to={"/products"} underline="none">
-              <Button sx={styleModalButton} variant="contained">
+              <Button sx={styleButton} variant="contained">
                 Continuer mes achats
               </Button>
             </Link>
 
             <Link component={RouterLink} to={"/cart"} underline="none">
-              <Button sx={styleModalButton} variant="contained">
+              <Button sx={styleButton} variant="contained">
                 Voir mon panier
               </Button>
             </Link>
