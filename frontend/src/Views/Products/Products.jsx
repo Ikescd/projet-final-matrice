@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
-import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
-import TablePagination from "@mui/material/TablePagination";
-import Link from "@mui/material/Link";
+import {
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Link,
+  TablePagination,
+  Typography,
+} from "@mui/material";
 
 export default function Products() {
   // const { products } = require("../../Helpers/FakeData.js");
@@ -31,7 +37,13 @@ export default function Products() {
   };
 
   return (
-    <div>
+    <Box>
+      <Typography
+        variant="h4"
+        sx={{ color: "#117A5D", fontFamily: "Time new roman", margin: 2 }}
+      >
+        Nos produits
+      </Typography>
       <Box
         sx={{
           display: "flex",
@@ -48,16 +60,33 @@ export default function Products() {
               underline="none"
             >
               <CardMedia component="img" height="140" image={product.picture} />
-              <CardContent>
+              <CardContent
+                sx={{
+                  bgcolor: "#ECF0C6",
+                  minHeight: "90px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                }}
+              >
                 <Typography
                   gutterBottom
                   variant="h5"
-                  color="text.primary"
                   component="div"
+                  sx={{
+                    fontFamily: "Time new roman",
+                    color: "#117A5D",
+                  }}
                 >
                   {product.name}
                 </Typography>
-                <Typography variant="body2" color="text.primary">
+                <Typography
+                  variant="body2"
+                  sx={{
+                    fontFamily: "Time new roman",
+                    color: "#117A5D",
+                  }}
+                >
                   {(product.price / 100).toFixed(2)} €
                 </Typography>
               </CardContent>
@@ -74,6 +103,6 @@ export default function Products() {
         rowsPerPage={rowsPerPage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-    </div>
+    </Box>
   );
 }
