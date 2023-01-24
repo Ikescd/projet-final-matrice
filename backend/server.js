@@ -5,6 +5,7 @@ const app = express();
 const mysql = require('mysql');
 
 const cors = require('cors');
+const { users } = require('../frontend/src/Helpers/FakeData');
 
 const corsOptions = {
 	origin: '*',
@@ -32,13 +33,27 @@ app.get('/', (req, res) => {
 	res.send('oui');
 });
 
-app.get('/users', (req, res) => {
+app.get('/api/users', (req, res) => {
 	connection.query('SELECT * FROM users', (err, result) => {
 		if (err) return res.sendStatus(400);
 		return res.send(result);
 	});
 });
 
-app.listen(3000, () => {
+app.get('/api/products', (req, res) => {
+	connection.query('SELECT * FROM products', (err, result) => {
+		if (err) return res.sendStatus(400);
+		return res.send(result);
+	});
+});
+
+app.get('/api/products/:id', (req, res) => {
+	connection.query('SELECT * FROM products WHERE id=' + req.params.id, (err, result) => {
+		if (err) return res.sendStatus(400);
+		return res.send(result);
+	});
+});
+
+app.listen(port, () => {
 	console.log('bien connecté');
 });

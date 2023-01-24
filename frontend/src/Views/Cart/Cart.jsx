@@ -1,101 +1,76 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { cart as data } from '../../Helpers/FakeData';
+import React, { useState, useEffect } from 'react';
 
-import {
-	Link,
-	Typography,
-	Box,
-	Table,
-	TableHead,
-	TableRow,
-	TableCell,
-	TableBody,
-	Button,
-	TextField,
-} from '@mui/material/';
-
-import { KeyboardArrowLeft } from '@mui/icons-material';
-
-const url = 'https://pokeapi.co/api/v2/pokemon/ditto';
-
-export default function Cart() {
-	const [isLoading, setIsLoading] = useState(true);
-	// const [cart, setCart] = useState(data);
-	const [cart, setCart] = useState(data);
+function Cart() {
+	const [cart, setCart] = useState(() => {
+		const localCart = localStorage.getItem('cart');
+		return localCart ? JSON.parse(localCart) : [];
+	});
+	const [productDetails, setProductDetails] = useState([]);
+	let fetchedProduct = new Set();
 
 	useEffect(() => {
-		fetch(url)
-			.then((res) => res.json())
-			.then((/*data*/) => {
-				// setCart(data);
-				setIsLoading(false);
+		localStorage.setItem('cart', JSON.stringify(cart));
+		const fetchProducts = async () => {
+			for (const product of cart) {
+				if (!fetchedProduct.has(product.productID)) {
+					fetchedProduct.add(product.productID);
+					const response = await fetch(`http://localhost:3000/api/products/${product.productID}`);
+					const data = await response.json();
+					setProductDetails((prevProducts) => [...prevProducts, data]);
+				}
+			}
+		};
+		fetchProducts();
+	}, [cart]);
+
+	const updateProduct = (product, updatedQuantity) => {
+		setCart((prevCart) =>
+			prevCart.map((prod) => {
+				console.log(prod);
+				if (prod.productID === product) {
+					return { ...prod, quantity: updatedQuantity };
+				}
+				return prod;
 			})
-			.catch((err) => console.error(err));
-	}, []);
+		);
+	};
 
-	return (
-		<Box>
-			<Link href='/' sx={{ display: 'flex' }}>
-				<KeyboardArrowLeft />
-				<Typography>Retour à l'accueil</Typography>
-			</Link>
-
-			<Typography>Mon panier</Typography>
-
-			{isLoading && (
-				<Box>
-					<Typography>Vous n'avez pas encore de panier</Typography>
-				</Box>
-			)}
-
-			{!isLoading && (
-				<Table>
-					<TableHead>
-						<TableRow>
-							<TableCell>Nom</TableCell>
-							<TableCell>Quantité</TableCell>
-							<TableCell>Total</TableCell>
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						{cart.map((el) => (
-							<CartProductDetails
-								product={el.product}
-								quantity={el.quantityBuy}
-								key={el.product.product_id}
-							/>
-						))}
-					</TableBody>
-				</Table>
-			)}
-			<Button>Mettre à jour le panier</Button>
-			<Button>Passer la commande</Button>
-		</Box>
-	);
-}
-
-const CartProductDetails = (props) => {
-	const { product, quantity } = props;
-	const initialState = product.price * quantity;
-
-	const [total, setTotal] = useState(initialState);
-
-	const handleChange = (event) => {
-		const newTotal = product.price * event.target.value;
-		setTotal(newTotal);
+	const removeProduct = (product) => {
+		setProductDetails((prevProducts) => prevProducts.filter((prod) => prod.id !== product));
+		setCart(cart.filter((prod) => prod.product !== product));
 	};
 
 	return (
-		<TableRow key={product.product_id}>
-			<TableCell>
-				<img src={product.picture} style={{ width: 150 }} />
-			</TableCell>
-			<TableCell>{product.name}</TableCell>
-			<TableCell>
-				<TextField type='number' defaultValue={quantity} onChange={handleChange} />
-			</TableCell>
-			<TableCell>{parseFloat(total / 100)} €</TableCell>
-		</TableRow>
+		<div>
+			<h2>Panier</h2>
+			{cart.map((el) => {
+				console.log(cart);
+				let productInCart = {};
+
+				productDetails.map((productEL) => {
+					if (productEL[0].id === el.productID) productInCart = productEL[0];
+				});
+
+				const total = el.quantity * productInCart.price;
+
+				return (
+					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+						<img src={productInCart.picture} alt={productInCart.name} style={{ width: 150 }} />
+						<div>
+							<p>{productInCart.name}</p>
+							<p>{(productInCart.price / 100).toFixed(2)} €</p>
+						</div>
+						<div style={{ display: 'flex' }}>
+							<button onClick={() => updateProduct(productInCart.id, el.quantity + 1)}>+</button>
+							<p>{el.quantity}</p>
+							<button onClick={() => updateProduct(productInCart.id, el.quantity - 1)}>-</button>
+						</div>
+						<div>{(total / 100).toFixed(2)} €</div>
+					</div>
+				);
+			})}
+		</div>
 	);
-};
+}
+
+export default Cart;
