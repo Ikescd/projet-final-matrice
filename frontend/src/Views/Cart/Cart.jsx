@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Link, Typography } from '@mui/material';
+import { Box, Button, Link, Typography } from '@mui/material';
 
 import CartList from './CartList';
 
@@ -17,21 +17,48 @@ function Cart() {
 		setIsLoading(false);
 	}, [cart]);
 
+	const updateProduct = (productId, updatedQuantity) => {
+		setCart((prevCart) =>
+			prevCart.map((prod) => {
+				if (prod.product_id === productId) {
+					return { ...prod, quantity: updatedQuantity };
+				}
+				return prod;
+			})
+		);
+	};
+
+	const removeProduct = (/*product*/) => {
+		console.log('remove');
+		// setProductDetails((prevProducts) => prevProducts.filter((prod) => prod.id !== product));
+		// setCart(cart.filter((prod) => prod.product !== product));
+	};
+
 	return (
 		<Box sx={{ width: '75%', margin: '50px auto' }}>
-			<Link href='/' sx={{ display: 'flex' }}>
-				<KeyboardArrowLeftIcon />
-				<Typography>Retour à l'accueil</Typography>
-			</Link>
+			<Box id='goToHomepage'>
+				<Link href='/' sx={{ display: 'flex' }}>
+					<KeyboardArrowLeftIcon />
+					<Typography>Retour à l'accueil</Typography>
+				</Link>
+			</Box>
 
-			<Typography variant='h5' sx={{ textAlign: 'center', margin: '50px' }}>
-				Mon panier
-			</Typography>
+			<Box id='cartContainer'>
+				<Typography variant='h5' sx={{ textAlign: 'center', margin: '50px' }}>
+					Mon panier
+				</Typography>
 
-			{isLoading ? <Typography>Chargement de votre panier...</Typography> : <CartList />}
-			{!isLoading && cart.length == 0 && (
-				<Typography>Il n'y a rien dans votre panier. Voulez-vous faire quelques achats ?</Typography>
-			)}
+				{!isLoading && <CartList cart={cart} onUpdate={updateProduct} onRemove={removeProduct} />}
+
+				{isLoading && <Typography>Chargement de votre panier...</Typography>}
+				{!isLoading && cart.length == 0 && (
+					<Typography>
+						Il n'y a rien dans votre panier. Voulez-vous faire quelques achats ?
+					</Typography>
+				)}
+
+				<Button>Passer la commande</Button>
+			</Box>
 		</Box>
 	);
 }
