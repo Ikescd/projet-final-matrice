@@ -43,16 +43,24 @@ export default function Header() {
 						</Link>
 					</Box>
 
+					{/* Provisoire */}
+					<Link sx={{ margin: '0 15px', color: 'white' }} href='/orders'>
+						<Typography>ORDERS</Typography>
+					</Link>
+
 					{user.isLogged && (
-						<Box sx={{ display: 'flex', marginLeft: 'auto' }}>
-							<Link href='/profile'>
-								<Typography sx={{ margin: '0 15px', color: 'white' }}>{firstName}</Typography>
+						<Box sx={{ display: 'flex', marginLeft: 'auto', alignItems: 'center' }}>
+							<Link href='/profile' sx={{ margin: '0 15px', color: 'white' }}>
+								<Typography>{firstName}</Typography>
 							</Link>
-							<Link href='/cart'>
-								<ShoppingCartIcon sx={{ margin: '0 15px', color: 'white' }} />
+							<Link href='/cart' sx={{ margin: '0 15px', color: 'white' }}>
+								<ShoppingCartIcon />
 							</Link>
-							<Link onClick={() => alert('tu es pas déconnecté.e / fonction à faire bisou')}>
-								<LogoutIcon sx={{ margin: '0 15px', color: 'white' }} />
+							<Link
+								onClick={() => alert('tu es pas déconnecté.e / fonction à faire bisou')}
+								sx={{ margin: '0 15px', color: 'white' }}
+							>
+								<LogoutIcon />
 							</Link>
 						</Box>
 					)}
