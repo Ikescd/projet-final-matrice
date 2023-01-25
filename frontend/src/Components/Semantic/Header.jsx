@@ -39,7 +39,7 @@ export default function Header() {
 				>
 					<Box sx={{ flex: 1 }}>
 						<Link href='/' sx={{ color: 'white' }}>
-							<img src={logo} alt='Recycle-rat logo' style={{ width: 50 }} />
+							<img src={logo} alt='Recycle-rat logo' style={{ height: 50 }} />
 						</Link>
 					</Box>
 

@@ -8,6 +8,7 @@ function Cart() {
 		const localCart = localStorage.getItem('cart');
 		return localCart ? JSON.parse(localCart) : [];
 	});
+
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {

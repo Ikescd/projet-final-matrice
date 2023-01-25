@@ -4,13 +4,13 @@ import React, { useState, useEffect } from 'react';
 export default function CartDetails(props) {
 	const [product, setProduct] = useState();
 	const { id, productCart, onUpdate, onRemove } = props;
-
 	useEffect(() => {
 		fetch('http://localhost:3000/api/products/' + id)
 			.then((res) => res.json())
 			.then((data) => setProduct(data[0]));
 	}, []);
 
+	console.log(JSON.stringify(product));
 	return (
 		product !== undefined && (
 			<TableRow>
