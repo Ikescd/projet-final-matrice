@@ -13,11 +13,6 @@ import {
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 
 export default function ProductDetails() {
-  // const { products } = require("../../Helpers/FakeData.js");
-
-  // const { id } = useParams();
-  // const product = products[id - 1];
-
   const [product, setProduct] = useState([]);
   const params = useParams();
 
@@ -25,7 +20,7 @@ export default function ProductDetails() {
     fetch(`http://localhost:3000/api/products/${params.id}`)
       .then((res) => res.json())
       .then((data) => {
-        setProduct(data.result[0]);
+        setProduct(data[0]);
       })
       .catch((err) => console.error(err));
   }, [params.id]);
@@ -48,7 +43,6 @@ export default function ProductDetails() {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-between",
-    // boxShadow: 24,
     p: 4,
   };
 

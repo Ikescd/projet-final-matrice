@@ -11,15 +11,14 @@ import {
   Typography,
 } from "@mui/material";
 
-export default function Products() {
-  // const { products } = require("../../Helpers/FakeData.js");
+export default function Products() {  
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:3000/api/products")
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data.result);
+        setProducts(data);
       })
       .catch((err) => console.error(err));
   }, []);
