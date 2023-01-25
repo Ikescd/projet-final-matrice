@@ -40,6 +40,12 @@ app.get('/api/users', (req, res) => {
 		return res.send(result);
 	});
 });
+app.get('/api/users/:id', (req, res) => {
+	connection.query('SELECT * FROM users WHERE id=' + req.params.id, (err, result) => {
+		if (err) return res.sendStatus(400);
+		return res.send(result);
+	});
+});
 
 productsRoutes(app, connection);
 

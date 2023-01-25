@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import ProductDetails from './Views/Products/ProductDetails';
 import Products from './Views/Products/Products';
-
+import Layout from './Components/Layout';
 import Cart from './Views/Cart/Cart';
 
 function App() {
@@ -33,10 +33,6 @@ function App() {
 		</Router>
 	);
 }
-
-const Layout = (props) => {
-	return <div>{props.children}</div>;
-};
 
 const UnderConstruction = () => {
 	return (

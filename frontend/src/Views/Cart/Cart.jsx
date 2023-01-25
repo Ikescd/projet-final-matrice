@@ -33,7 +33,7 @@ function Cart() {
 	};
 
 	return (
-		<Box sx={{ margin: '50px auto' }}>
+		<Box sx={{ margin: '0 auto' }}>
 			<Box id='goToHomepage'>
 				<Link href='/' sx={{ display: 'flex' }}>
 					<KeyboardArrowLeftIcon />
