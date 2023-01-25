@@ -8,6 +8,7 @@ function Cart() {
 		const localCart = localStorage.getItem('cart');
 		return localCart ? JSON.parse(localCart) : [];
 	});
+	const [productsToOrder, setProductsToOrder] = useState();
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
@@ -46,7 +47,15 @@ function Cart() {
 					Mon panier
 				</Typography>
 
-				{!isLoading && <CartList cart={cart} onUpdate={updateProduct} onRemove={removeProduct} />}
+				{!isLoading && (
+					<CartList
+						cart={cart}
+						onUpdate={updateProduct}
+						onRemove={removeProduct}
+						productsToOrder={productsToOrder}
+						setProductsToOrder={setProductsToOrder}
+					/>
+				)}
 
 				{isLoading && <Typography>Chargement de votre panier...</Typography>}
 

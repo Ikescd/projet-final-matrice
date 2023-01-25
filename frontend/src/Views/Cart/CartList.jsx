@@ -12,7 +12,7 @@ import {
 import CartDetails from './CartDetails';
 
 export default function CartList(props) {
-	const { cart, onUpdate, onRemove } = props;
+	const { cart } = props;
 
 	return (
 		<Table>
@@ -36,9 +36,8 @@ export default function CartList(props) {
 						<CartDetails
 							key={element.product_id}
 							id={element.product_id}
-							onUpdate={onUpdate}
-							onRemove={onRemove}
 							productCart={element}
+							{...props}
 						/>
 					);
 				})}
