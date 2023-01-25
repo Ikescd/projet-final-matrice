@@ -25,6 +25,7 @@ function App() {
 					<Route path='/categories/:id' element={<CategoryDetails />} />
 
 					<Route path='/cart' element={<Cart />} />
+					<Route path='/to-order' element={<UnderConstruction />} />
 					<Route path='/orders' element={<UnderConstruction />} />
 					<Route path='/orders/:id' element={<UnderConstruction />} />
 
@@ -41,7 +42,12 @@ const Layout = (props) => {
 };
 
 const UnderConstruction = () => {
-	return <>Site en construction, revenez plus tard.</>;
+	return (
+		<>
+			<p>Site en construction, revenez plus tard.</p>
+			<a href='/'>Retour à l'accueil</a>
+		</>
+	);
 };
 
 const NotFound = () => {

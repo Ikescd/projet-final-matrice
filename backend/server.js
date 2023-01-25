@@ -11,8 +11,8 @@ const categoriesRoutes = require('./routes/categories/categoriesRoutes')
 
 const corsOptions = {
 	origin: '*',
-  credentials: true,
-  optionSuccessStatus: 200,
+	credentials: true,
+	optionSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
 	res.send('oui');
 });
 
-app.get('/users', (req, res) => {
+app.get('/api/users', (req, res) => {
 	connection.query('SELECT * FROM users', (err, result) => {
 		if (err) return res.sendStatus(400);
 		return res.send(result);
@@ -46,5 +46,5 @@ productsRoutes(app, connection);
 categoriesRoutes(app, connection)
 
 app.listen(port, () => {
-  console.log(`bien connecté au port ${port}`);
+	console.log(`bien connecté au port ${port}`);
 });
