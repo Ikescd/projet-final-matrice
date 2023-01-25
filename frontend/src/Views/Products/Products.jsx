@@ -23,7 +23,7 @@ export default function Products() {
       .catch((err) => console.error(err));
   }, []);
 
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (event, newPage) => {
@@ -100,7 +100,7 @@ export default function Products() {
       <TablePagination
         sx={{ mx: "auto" }}
         component="div"
-        count={100}
+        count={products.length}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}
