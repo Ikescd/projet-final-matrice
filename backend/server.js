@@ -7,6 +7,7 @@ const mysql = require('mysql');
 const cors = require('cors');
 
 const productsRoutes = require('./routes/products/productsRoutes');
+const categoriesRoutes = require('./routes/categories/categoriesRoutes')
 
 const corsOptions = {
 	origin: '*',
@@ -48,6 +49,7 @@ app.get('/api/users/:id', (req, res) => {
 });
 
 productsRoutes(app, connection);
+categoriesRoutes(app, connection)
 
 app.listen(port, () => {
 	console.log(`bien connecté au port ${port}`);
