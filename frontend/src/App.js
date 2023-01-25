@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
-import { cart } from './Helpers/FakeData';
+import ProductDetails from './Views/Products/ProductDetails';
+import Products from './Views/Products/Products';
 
 import Cart from './Views/Cart/Cart';
 
@@ -17,8 +18,8 @@ function App() {
 
 					<Route path='/profile' element={<UnderConstruction />} />
 
-					<Route path='/products' element={<UnderConstruction />} />
-					<Route path='/products/:id' element={<UnderConstruction />} />
+					<Route path='/products' element={<Products />} />
+					<Route path='/products/:id' element={<ProductDetails />} />
 
 					<Route path='/cart' element={<Cart />} />
 					<Route path='/to-order' element={<UnderConstruction />} />
