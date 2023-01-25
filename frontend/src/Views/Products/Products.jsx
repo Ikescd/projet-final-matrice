@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 
-export default function Products() {  
+export default function Products() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -58,11 +58,15 @@ export default function Products() {
               to={`/products/${product.id}`}
               underline="none"
             >
-              <CardMedia component="img" height="140" image={product.picture} />
+              <CardMedia
+                component="img"
+                image={product.picture}
+                sx={{ height: "140px" }}
+              />
               <CardContent
                 sx={{
                   bgcolor: "#ECF0C6",
-                  minHeight: "95px",
+                  minHeight: "135px",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
