@@ -7,6 +7,7 @@ import Categories from './Views/Categories/Categories';
 import CategoryDetails from './Views/Categories/CategoryDetails';
 
 import Cart from './Views/Cart/Cart';
+import { Typography } from '@mui/material';
 
 function App() {
 	return (
@@ -54,8 +55,11 @@ const NotFound = () => {
 const Homepage = () => {
 	return (
 		<>
-			Bienvenue sur le site de Recycle-RAT
-			<a href='/cart'>Le panier</a>
+			<Typography sx={{ textAlign: 'center', fontSize: '1.2em' }}>
+				Bienvenue sur le site de <strong>Recycle-RAT</strong>,<br />
+				le paRATdis des écolos à petits budgets !
+			</Typography>
+
 			<Categories />
 			<Products />
 		</>
