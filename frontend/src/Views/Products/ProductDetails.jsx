@@ -34,8 +34,8 @@ export default function ProductDetails() {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 450,
-    height: 150,
+    minWidth: 340,
+
     bgcolor: "#fff",
     border: "1px solid #117A5D",
     borderRadius: 2,
@@ -44,6 +44,7 @@ export default function ProductDetails() {
     alignItems: "center",
     justifyContent: "space-between",
     p: 4,
+    color: "#117A5D",
   };
 
   const styleButton = {
@@ -161,15 +162,30 @@ export default function ProductDetails() {
       >
         <Box sx={styleModal}>
           <Box>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+              sx={{ fontFamily: "Time new roman", textAlign: "center" }}
+            >
               Bien joué!
             </Typography>
-            <Typography id="modal-modal-description">
+            <Typography
+              id="modal-modal-description"
+              sx={{ fontFamily: "Time new roman", mb: 2 }}
+            >
               {product.name} ajouté au panier
             </Typography>
           </Box>
-          <Box>
-            <Link component={RouterLink} to={"/products"} underline="none">
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              justifyContent: "center",
+            }}
+          >
+            <Link component={RouterLink} to={"/"} underline="none">
               <Button sx={styleButton} variant="contained">
                 Continuer mes achats
               </Button>
