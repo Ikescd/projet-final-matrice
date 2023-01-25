@@ -11,7 +11,6 @@ export default function CartDetails(props) {
 			.then((data) => setProduct(data[0]));
 	}, []);
 
-	console.log(product);
 	return (
 		product !== undefined && (
 			<TableRow>
