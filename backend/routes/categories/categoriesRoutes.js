@@ -3,22 +3,34 @@ function categoriesRoutes(app, db) {
   app.get("/api/categories", async (req, res) => {
     await db.query(`SELECT * FROM categories`, (err, result) => {
       if (err) throw err;
-      res.status(200).json(result);
+      res.status(200).send(result);
     });
   });
 
   // get products by category
+  app.get("/api/category/:id/products", async (req, res) => {
+    const id = req.params.id;
+
+    await db.query(
+      `SELECT * FROM products WHERE category_id = ?`,
+      [id],
+      (err, result) => {
+        if (err) throw err;
+        res.status(200).send(result);
+      }
+    );
+  });
+
+  // get one category
   app.get("/api/category/:id", async (req, res) => {
     const id = req.params.id;
 
     await db.query(
-      `SELECT products.id, products.name, description, item_code, price, quantityInStock, products.picture, category_id, categories.name as category_name FROM products
-      INNER JOIN categories ON products.category_id=categories.id
-      WHERE category_id = ?`,
+      `SELECT * FROM categories WHERE id = ?`,
       [id],
       (err, result) => {
         if (err) throw err;
-        res.status(200).json(result);
+        res.status(200).send(result);
       }
     );
   });
@@ -34,7 +46,7 @@ function categoriesRoutes(app, db) {
         [name, picture],
         (err, result) => {
           if (err) throw err;
-          res.json({ status: 200, result });
+          res.status(200).send(result);
         }
       );
     } else {
