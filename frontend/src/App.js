@@ -1,7 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import ProductDetails from './Views/Products/ProductDetails';
+import Products from './Views/Products/Products';
+import Layout from './Components/Layout';
+import Categories from './Views/Categories/Categories';
+import CategoryDetails from './Views/Categories/CategoryDetails';
 
 import Cart from './Views/Cart/Cart';
+import { Typography } from '@mui/material';
 import Login from './Views/User/Login';
 import SignUp from './Views/User/SignUp';
 import UserProvider from '../src/Views/User/UserContext';
@@ -21,10 +27,12 @@ function App() {
 
 					<Route path='/profile' element={<UnderConstruction />} />
 
-					<Route path='/products' element={<UnderConstruction />} />
-					<Route path='/products/:id' element={<UnderConstruction />} />
+					<Route path='/products' element={<Products />} />
+					<Route path='/products/:id' element={<ProductDetails />} />
+					<Route path='/categories/:id' element={<CategoryDetails />} />
 
 					<Route path='/cart' element={<Cart />} />
+					<Route path='/to-order' element={<UnderConstruction />} />
 					<Route path='/orders' element={<UnderConstruction />} />
 					<Route path='/orders/:id' element={<UnderConstruction />} />
 
@@ -37,12 +45,13 @@ function App() {
 	);
 }
 
-const Layout = (props) => {
-	return <div>{props.children}</div>;
-};
-
 const UnderConstruction = () => {
-	return <>Site en construction, revenez plus tard.</>;
+	return (
+		<>
+			<p>Site en construction, revenez plus tard.</p>
+			<a href='/'>Retour à l'accueil</a>
+		</>
+	);
 };
 
 const NotFound = () => {
@@ -52,8 +61,13 @@ const NotFound = () => {
 const Homepage = () => {
 	return (
 		<>
-			Bienvenue sur le site de Recycle-RAT
-			<a href='/cart'>Le panier</a>
+			<Typography sx={{ textAlign: 'center', fontSize: '1.2em' }}>
+				Bienvenue sur le site de <strong>Recycle-RAT</strong>,<br />
+				le paRATdis des écolos à petits budgets !
+			</Typography>
+
+			<Categories />
+			<Products />
 		</>
 	);
 };

@@ -1,101 +1,65 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { cart as data } from '../../Helpers/FakeData';
+import React, { useState, useEffect } from 'react';
+import { Box, Button, Link, Typography } from '@mui/material';
+import CartList from './CartList';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
-import {
-	Link,
-	Typography,
-	Box,
-	Table,
-	TableHead,
-	TableRow,
-	TableCell,
-	TableBody,
-	Button,
-	TextField,
-} from '@mui/material/';
-
-import { KeyboardArrowLeft } from '@mui/icons-material';
-
-const url = 'https://pokeapi.co/api/v2/pokemon/ditto';
-
-export default function Cart() {
+function Cart() {
+	const [cart, setCart] = useState(() => {
+		const localCart = localStorage.getItem('cart');
+		return localCart ? JSON.parse(localCart) : [];
+	});
 	const [isLoading, setIsLoading] = useState(true);
-	// const [cart, setCart] = useState(data);
-	const [cart, setCart] = useState(data);
 
 	useEffect(() => {
-		fetch(url)
-			.then((res) => res.json())
-			.then((/*data*/) => {
-				// setCart(data);
-				setIsLoading(false);
+		localStorage.setItem('cart', JSON.stringify(cart));
+		setIsLoading(false);
+	}, [cart]);
+
+	const updateProduct = (productId, updatedQuantity) => {
+		setCart((prevCart) =>
+			prevCart.map((prod) => {
+				if (prod.product_id === productId) {
+					return { ...prod, quantity: updatedQuantity };
+				}
+				return prod;
 			})
-			.catch((err) => console.error(err));
-	}, []);
+		);
+	};
+
+	const removeProduct = (productId) => {
+		console.log('remove');
+
+		setCart(cart.filter((prod) => prod.product_id !== productId));
+	};
 
 	return (
-		<Box>
-			<Link href='/' sx={{ display: 'flex' }}>
-				<KeyboardArrowLeft />
-				<Typography>Retour à l'accueil</Typography>
-			</Link>
+		<Box sx={{ margin: '0 auto' }}>
+			<Box id='goToHomepage'>
+				<Link href='/' sx={{ display: 'flex' }}>
+					<KeyboardArrowLeftIcon />
+					<Typography>Retour à l'accueil</Typography>
+				</Link>
+			</Box>
 
-			<Typography>Mon panier</Typography>
+			<Box id='cartContainer'>
+				<Typography variant='h5' sx={{ textAlign: 'center', margin: '50px' }}>
+					Mon panier
+				</Typography>
 
-			{isLoading && (
-				<Box>
-					<Typography>Vous n'avez pas encore de panier</Typography>
-				</Box>
-			)}
+				{!isLoading && <CartList cart={cart} onUpdate={updateProduct} onRemove={removeProduct} />}
 
-			{!isLoading && (
-				<Table>
-					<TableHead>
-						<TableRow>
-							<TableCell>Nom</TableCell>
-							<TableCell>Quantité</TableCell>
-							<TableCell>Total</TableCell>
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						{cart.map((el) => (
-							<CartProductDetails
-								product={el.product}
-								quantity={el.quantityBuy}
-								key={el.product.product_id}
-							/>
-						))}
-					</TableBody>
-				</Table>
-			)}
-			<Button>Mettre à jour le panier</Button>
-			<Button>Passer la commande</Button>
+				{isLoading && <Typography>Chargement de votre panier...</Typography>}
+
+				{!isLoading && cart.length == 0 && (
+					<Typography>
+						Il n'y a rien dans votre panier. Voulez-vous faire quelques achats ?
+					</Typography>
+				)}
+
+				<Button href='/to-order'>Passer la commande</Button>
+			</Box>
 		</Box>
 	);
 }
 
-const CartProductDetails = (props) => {
-	const { product, quantity } = props;
-	const initialState = product.price * quantity;
-
-	const [total, setTotal] = useState(initialState);
-
-	const handleChange = (event) => {
-		const newTotal = product.price * event.target.value;
-		setTotal(newTotal);
-	};
-
-	return (
-		<TableRow key={product.product_id}>
-			<TableCell>
-				<img src={product.picture} style={{ width: 150 }} />
-			</TableCell>
-			<TableCell>{product.name}</TableCell>
-			<TableCell>
-				<TextField type='number' defaultValue={quantity} onChange={handleChange} />
-			</TableCell>
-			<TableCell>{parseFloat(total / 100)} €</TableCell>
-		</TableRow>
-	);
-};
+export default Cart;

@@ -7,6 +7,8 @@ const mysql = require('mysql');
 
 const cors = require('cors');
 
+const indexesRoutes = require('./routes/indexesRoutes')
+
 const usersRoutes = require ('./routes/usersRoutes')
 
 const corsOptions = {
@@ -41,5 +43,5 @@ app.get('/', (req, res) => {
 usersRoutes(app, connection)
 
 app.listen(port, () => {
-	console.log(`bien connecté sur le port ${port}`);
+	console.log(`bien connecté au port ${port}`);
 });
