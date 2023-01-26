@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+const authMiddleware = require('./routes/authMiddleware')
 const express = require('express');
 const app = express();
 const mysql = require('mysql');
@@ -17,6 +18,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+// app.use("/api/users", authMiddleware, usersRoutes);
+
 
 const port = process.env.PORT || 8080;
 
@@ -38,5 +41,5 @@ app.get('/', (req, res) => {
 usersRoutes(app, connection)
 
 app.listen(port, () => {
-	console.log('bien connecté');
+	console.log(`bien connecté sur le port ${port}`);
 });

@@ -4,10 +4,13 @@ import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-d
 import Cart from './Views/Cart/Cart';
 import Login from './Views/User/Login';
 import SignUp from './Views/User/SignUp';
+import UserProvider from '../src/Views/User/UserContext';
+
 
 function App() {
 	return (
 		<Router>
+			<UserProvider>
 			<Layout>
 				<Routes>
 					<Route path='/' element={<Homepage />} />
@@ -29,6 +32,7 @@ function App() {
 					<Route path='*' element={<Navigate to='/404' replace />} />
 				</Routes>
 			</Layout>
+			</UserProvider>
 		</Router>
 	);
 }

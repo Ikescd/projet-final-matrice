@@ -1,30 +1,31 @@
 require("dotenv").config();
 
 const express = require("express");
-const {check, validationResult} = require("express-validator");
+const { check, validationResult } = require("express-validator");
 const app = express();
 const mysql = require("mysql");
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const authMiddleware = require("./authMiddleware");
 
 function usersRoutes(app, connection) {
+  const secretKey = process.env.SECRET_KEY
   //Create new user
   app.post("/api/users/add", async (req, res) => {
     if (
       req.body.first_name &&
       req.body.last_name &&
       req.body.email &&
-      req.body.password 
+      req.body.password
     ) {
-      const hash = await bcrypt.hash(req.body.password, 10)
+      const hash = await bcrypt.hash(req.body.password, 10);
 
       const first_name = req.body.first_name;
       const last_name = req.body.last_name;
       const email = req.body.email;
       const password = hash;
       const role = "user";
-
 
       const responseDB = await connection.query(
         "INSERT INTO users ( first_name, last_name, email, password, role) VALUES (?,?,?,?,?)",
@@ -37,6 +38,29 @@ function usersRoutes(app, connection) {
     } else {
       res.sendStatus(422);
     }
+  });
+
+  app.post("/api/users/login", async (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    // verify the user 
+    await connection.query(
+      "SELECT * FROM users WHERE email = ? ",
+      [email],
+      (err, result) => {
+        let user = result[0];
+        if (!user) {
+          res.status(401).json({ message: "Invalid email" });
+        }
+        bcrypt.compare(password, user.password).then((match) => {
+          if (!match) {
+              return res.status(401).json({ message: "Invalid password" });
+            }
+            const token = jwt.sign({ id: user.id }, secretKey, {expiresIn: "24h"});
+            res.json({ status: 200, token, user: user})
+        })
+      });
   });
 
   //Read all users
