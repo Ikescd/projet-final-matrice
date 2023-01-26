@@ -1,13 +1,13 @@
-function categoriesRoutes(app, db) {
-  // get all categories
+function getAllCategories(app, db) {
   app.get("/api/categories", async (req, res) => {
     await db.query(`SELECT * FROM categories`, (err, result) => {
       if (err) throw err;
       res.status(200).send(result);
     });
   });
+}
 
-  // get products by category
+function getProductsByCategory(app, db) {
   app.get("/api/category/:id/products", async (req, res) => {
     const id = req.params.id;
 
@@ -20,8 +20,9 @@ function categoriesRoutes(app, db) {
       }
     );
   });
+}
 
-  // get one category
+function getOneCategory(app, db) {
   app.get("/api/category/:id", async (req, res) => {
     const id = req.params.id;
 
@@ -34,8 +35,9 @@ function categoriesRoutes(app, db) {
       }
     );
   });
+}
 
-  //Create product
+function createCategory(app, db) {
   app.post("/api/category", async (req, res) => {
     if (req.body.name && req.body.picture) {
       const name = req.body.name;
@@ -55,4 +57,9 @@ function categoriesRoutes(app, db) {
   });
 }
 
-module.exports = categoriesRoutes;
+module.exports = {
+  getAllCategories,
+  getProductsByCategory,
+  getOneCategory,
+  createCategory,
+};
