@@ -127,6 +127,33 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `description`, `item_code`, `price`, `quantityInStock`, `picture`, `category_id`) VALUES
+(1, 'Meuble TV en bois recyclé', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi repellendus excepturi porro cum sit, voluptatibus quo blanditiis saepe nam commodi eaque necessitatibus dicta itaque facilis.', NULL, 23050, 4, 'https://www.trendymobilier.com/app/uploads/2020/07/55365-Meuble-TV-vintage-en-bois-recycle.jpg', 3),
+(2, 'Jouet Van et figurines en plastique recyclé', 'LE JOUET qui accompagne les carnets de voyage ! Dans chaque magazine, vos enfants suivent les aventure des petits Duchemin, et ils adorent…', NULL, 1500, 10, 'https://lacartefrancaise.fr//wp-content/uploads/2022/10/jouet-van-plastique-recycle-1-600x437.jpg', 2),
+(3, 'Sous marin arrosoir de bain en plastique recyclé', 'Prenez la barre de ce sous-marin ! Immergez-le sous l\'eau pour explorer le fond de la baignoire, de la piscine et observez l\'hélice tournante.', NULL, 1400, 15, 'https://www.chez-les-enfants.fr/web/image/product.product/11596/image', 2),
+(4, 'Tabouret', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi repellendus excepturi porro cum sit, voluptatibus quo blanditiis saepe nam commodi eaque necessitatibus dicta itaque facilis.', '123', 4000, 8, 'https://cdn.tiptoe.fr/wp-content/uploads/2019/06/LOU-CHENE-MASSIF-NOIR-V2.jpg?twic=v1/resize=270', 3),
+(5, 'Tabouret bas', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi repellendus excepturi porro cum sit, voluptatibus quo blanditiis saepe nam commodi eaque necessitatibus dicta itaque facilis.', '123', 3000, 8, 'https://meuble-passion.com/8219-large_default/tabouret-bois-de-bateau-recycle-truckwood-50cm.jpg', 3),
+(6, 'Fauteuil recyclé', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi repellendus excepturi porro cum sit, voluptatibus quo blanditiis saepe nam commodi eaque necessitatibus dicta itaque facilis.', NULL, 5000, 6, 'https://www.designferia.com/sites/default/files/styles/article_images__s640_/public/field/image/anciens-pneus-objets-recycles-jardin.jpg', 3),
+(7, 'Bougie', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi repellendus excepturi porro cum sit, voluptatibus quo blanditiis saepe nam commodi eaque necessitatibus dicta itaque facilis.', NULL, 999, 19, 'https://www.cdixvins.fr/cache/2/f/e/6/6/2fe66854a9e777f90665f5f944c6fdcfe00eb6f5.png', 4),
+(8, 'Vide-Poche', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi repellendus excepturi porro cum sit, voluptatibus quo blanditiis saepe nam commodi eaque necessitatibus dicta itaque facilis.', NULL, 1999, 12, 'https://luisart.fr/wp-content/uploads/2021/03/victoria-coupelle-vide-poche-papier-3.jpg', 4),
+(9, 'Chaise', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi repellendus excepturi porro cum sit, voluptatibus quo blanditiis saepe nam commodi eaque necessitatibus dicta itaque facilis.', NULL, 2999, 12, 'https://cache.marieclaire.fr/data/photo/w1000_ci/5v/design-recyclage.jpg', 3),
+(10, 'Miroir en papier recyclé', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi repellendus excepturi porro cum sit, voluptatibus quo blanditiis saepe nam commodi eaque necessitatibus dicta itaque facilis.', NULL, 5999, 6, 'https://media.adeo.com/marketplace/MKP/82698656/8e2337218809d1a1bd556760a2a91188.jpeg', 4),
+(11, 'Buffet', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi repellendus excepturi porro cum sit, voluptatibus quo blanditiis saepe nam commodi eaque necessitatibus dicta itaque facilis.', NULL, 15999, 6, 'https://d2ans0z9s1x1c.cloudfront.net/produits/buffet-bois-recycle-brisbane-5fe2345d51d08.jpg', 3);
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `picture`) VALUES
+(1, 'Vêtements', 'https://www.modeintextile.fr/wp-content/uploads/2019/12/reportecap-770x513.jpg'),
+(2, 'Jouets', 'https://france3-regions.francetvinfo.fr/image/zfKKwBCgw-Nn0naBR_lVNHvckis/1200x900/regions/2020/06/09/5edf8fb3e537d_noe03805-2_2-4493289.jpg'),
+(3, 'Meubles', 'https://www.kohdeco-meubles.com/3757-thickbox/meuble-tv-plugo-bois-bateau-salon.jpg'),
+(4, 'Décorations', 'https://www.floraqueen.com/fr/blog/wp-content/uploads/sites/6/2015/10/shutterstock_594793604.jpg');
+
+--
 -- Contraintes pour les tables déchargées
 --
 

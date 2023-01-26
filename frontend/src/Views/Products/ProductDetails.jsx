@@ -13,11 +13,6 @@ import {
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 
 export default function ProductDetails() {
-  // const { products } = require("../../Helpers/FakeData.js");
-
-  // const { id } = useParams();
-  // const product = products[id - 1];
-
   const [product, setProduct] = useState([]);
   const params = useParams();
 
@@ -25,7 +20,7 @@ export default function ProductDetails() {
     fetch(`http://localhost:3000/api/products/${params.id}`)
       .then((res) => res.json())
       .then((data) => {
-        setProduct(data.result[0]);
+        setProduct(data[0]);
       })
       .catch((err) => console.error(err));
   }, [params.id]);
@@ -39,8 +34,8 @@ export default function ProductDetails() {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 450,
-    height: 150,
+    minWidth: 340,
+
     bgcolor: "#fff",
     border: "1px solid #117A5D",
     borderRadius: 2,
@@ -48,8 +43,8 @@ export default function ProductDetails() {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-between",
-    // boxShadow: 24,
     p: 4,
+    color: "#117A5D",
   };
 
   const styleButton = {
@@ -167,15 +162,30 @@ export default function ProductDetails() {
       >
         <Box sx={styleModal}>
           <Box>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+              sx={{ fontFamily: "Time new roman", textAlign: "center" }}
+            >
               Bien joué!
             </Typography>
-            <Typography id="modal-modal-description">
+            <Typography
+              id="modal-modal-description"
+              sx={{ fontFamily: "Time new roman", mb: 2 }}
+            >
               {product.name} ajouté au panier
             </Typography>
           </Box>
-          <Box>
-            <Link component={RouterLink} to={"/products"} underline="none">
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              justifyContent: "center",
+            }}
+          >
+            <Link component={RouterLink} to={"/"} underline="none">
               <Button sx={styleButton} variant="contained">
                 Continuer mes achats
               </Button>
