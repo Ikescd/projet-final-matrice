@@ -1,12 +1,10 @@
 import {
-	Box,
-	Button,
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableRow,
-	Typography,
+	Table as MUITable,
+	TableBody as MUITBody,
+	TableCell as MUITCell,
+	TableHead as MUITHead,
+	TableRow as MUITRow,
+	Typography as MUITypo,
 } from '@mui/material';
 
 import CartDetails from './CartDetails';
@@ -15,22 +13,22 @@ export default function CartList(props) {
 	const { cart } = props;
 
 	return (
-		<Table>
-			<TableHead>
-				<TableRow>
-					<TableCell colSpan={2} sx={{ textAlign: 'center' }}>
-						<Typography>Produit</Typography>
-					</TableCell>
-					<TableCell sx={{ width: 150, textAlign: 'center' }}>
-						<Typography>Quantité</Typography>
-					</TableCell>
-					<TableCell sx={{ textAlign: 'right' }}>
-						<Typography>Prix</Typography>
-					</TableCell>
-				</TableRow>
-			</TableHead>
+		<MUITable>
+			<MUITHead>
+				<MUITRow>
+					<MUITCell colSpan={2} sx={{ textAlign: 'center' }}>
+						<MUITypo>Produit</MUITypo>
+					</MUITCell>
+					<MUITCell sx={{ width: 150, textAlign: 'center' }}>
+						<MUITypo>Quantité</MUITypo>
+					</MUITCell>
+					<MUITCell sx={{ textAlign: 'right' }}>
+						<MUITypo>Prix</MUITypo>
+					</MUITCell>
+				</MUITRow>
+			</MUITHead>
 
-			<TableBody>
+			<MUITBody>
 				{cart.map((element) => {
 					return (
 						<CartDetails
@@ -41,7 +39,7 @@ export default function CartList(props) {
 						/>
 					);
 				})}
-			</TableBody>
-		</Table>
+			</MUITBody>
+		</MUITable>
 	);
 }

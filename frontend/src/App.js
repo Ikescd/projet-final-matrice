@@ -28,7 +28,7 @@ function App() {
 					<Route path='/categories/:id' element={<CategoryDetails />} />
 
 					<Route path='/cart' element={<Cart />} />
-					<Route path='/to-order' element={<Order />} />
+					<Route path='/to-order' element={<UnderConstruction />} />
 					<Route path='/orders' element={<UnderConstruction />} />
 					<Route path='/orders/:id' element={<UnderConstruction />} />
 

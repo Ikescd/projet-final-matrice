@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Link, Typography } from '@mui/material';
-import { Link as LinkDOM } from 'react-router-dom';
+import {
+	Box as MUIBox,
+	Button as MUIButton,
+	Link as MUILink,
+	Typography as MUITypo,
+} from '@mui/material';
+import { Link as DOMLink } from 'react-router-dom';
+
 import CartList from './CartList';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 function Cart() {
+	/* We retrieve the cart from localstorage */
 	const [cart, setCart] = useState(() => {
 		const localCart = localStorage.getItem('cart');
 		return localCart
 			? JSON.parse(localCart)
 			: [
-					{ product_id: 1, quantity: 2 },
-					{ product_id: 5, quantity: 1 },
-					{ product_id: 8, quantity: 1 },
+					/* Uncomment to add a dummy cart */
+					// { product_id: 1, quantity: 2 },
+					// { product_id: 5, quantity: 1 },
+					// { product_id: 8, quantity: 1 },
 			  ];
 	});
 	const [productsToOrder, setProductsToOrder] = useState();
@@ -23,9 +31,15 @@ function Cart() {
 	useEffect(() => {
 		localStorage.setItem('cart', JSON.stringify(cart));
 		setIsLoading(false);
-		let productsList = [];
 
+		let productsList = [];
 		let total = 0;
+
+		/* 
+    For each product in cart, we fetch the correct data and push it on "productsInCart",
+    this variable we'll be used to create the order.
+    We also calculate the total amount of cart.
+    */
 		cart.map((el) => {
 			fetch('http://localhost:3000/api/products/' + el.product_id)
 				.then((res) => res.json())
@@ -33,6 +47,7 @@ function Cart() {
 					let totalProd = data[0].price * el.quantity;
 					total = total + totalProd;
 					productsList.push({ product: data[0], buyingQuantity: el.quantity });
+
 					setProductsInCart(productsList);
 					setTotalCart(total);
 				})
@@ -53,33 +68,29 @@ function Cart() {
 	};
 
 	const removeProduct = (productId) => {
-		console.log('remove');
-
 		setCart(cart.filter((prod) => prod.product_id !== productId));
 	};
 
 	return (
-		<Box sx={{ margin: '0 auto' }}>
-			<Box id='goToHomepage'>
-				<Link href='/' sx={{ display: 'flex' }}>
-					<KeyboardArrowLeftIcon />
-					<Typography>Retour à l'accueil</Typography>
-				</Link>
-			</Box>
+		<MUIBox sx={{ margin: '0 auto' }}>
+			<MUIBox id='goToHomepage'>
+				<MUILink href='/' sx={{ display: 'flex', textDecoration: 'none' }}>
+					<KeyboardArrowLeftIcon sx={{ color: '#117A5D' }} />
+					<MUITypo sx={{ color: '#117A5D' }}>Retour à l'accueil</MUITypo>
+				</MUILink>
+			</MUIBox>
 
-			<Box id='cartContainer'>
-				<Typography variant='h5' sx={{ textAlign: 'center', margin: '50px' }}>
+			<MUIBox id='cartContainer'>
+				<MUITypo variant='h5' sx={{ textAlign: 'center', margin: '50px' }}>
 					Mon panier
-				</Typography>
+				</MUITypo>
 
 				{/* Panier en cours de chargement */}
-				{isLoading && <Typography>Chargement de votre panier...</Typography>}
+				{isLoading && <MUITypo>Chargement de votre panier...</MUITypo>}
 
 				{/* Panier chargé, mais vide  */}
 				{!isLoading && cart.length === 0 && (
-					<Typography>
-						Il n'y a rien dans votre panier. Voulez-vous faire quelques achats ?
-					</Typography>
+					<MUITypo>Il n'y a rien dans votre panier. Voulez-vous faire quelques achats ?</MUITypo>
 				)}
 
 				{/* Panier chargé et non-vide  */}
@@ -87,11 +98,11 @@ function Cart() {
 					<>
 						<CartList cart={cart} onUpdate={updateProduct} onRemove={removeProduct} />
 
-						<Typography sx={{ textAlign: 'center', marginTop: '25px' }}>
+						<MUITypo sx={{ textAlign: 'center', marginTop: '25px' }}>
 							Total de la commande : {totalCart / 100} €
-						</Typography>
+						</MUITypo>
 
-						<LinkDOM
+						<DOMLink
 							to='/to-order'
 							state={{ products: productsInCart, total: totalCart }}
 							style={{
@@ -101,12 +112,14 @@ function Cart() {
 								margin: '15px',
 							}}
 						>
-							<Button variant='contained'>Passer la commande</Button>
-						</LinkDOM>
+							<MUIButton variant='contained' sx={{ backgroundColor: '#117A5D' }}>
+								Passer la commande
+							</MUIButton>
+						</DOMLink>
 					</>
 				)}
-			</Box>
-		</Box>
+			</MUIBox>
+		</MUIBox>
 	);
 }
 
