@@ -1,4 +1,10 @@
-import { Box, Button, TableCell, TableRow, Typography } from '@mui/material';
+import {
+	Box as MUIBox,
+	Button as MUIButton,
+	TableCell as MUITCell,
+	TableRow as MUITRow,
+	Typography as MUITypo,
+} from '@mui/material';
 import React, { useState, useEffect } from 'react';
 
 export default function CartDetails(props) {
@@ -13,18 +19,18 @@ export default function CartDetails(props) {
 
 	return (
 		product !== undefined && (
-			<TableRow>
-				<TableCell>
+			<MUITRow>
+				<MUITCell>
 					<img src={product.picture} alt={product.name} style={{ width: 150 }} />
-				</TableCell>
-				<TableCell>
-					<Typography>{product.name}</Typography>
-					<Typography>Prix à l'unité : {(product.price / 100).toFixed(2)} €</Typography>
-				</TableCell>
+				</MUITCell>
+				<MUITCell>
+					<MUITypo>{product.name}</MUITypo>
+					<MUITypo>Prix à l'unité : {(product.price / 100).toFixed(2)} €</MUITypo>
+				</MUITCell>
 
-				<TableCell sx={{ textAlign: 'center' }}>
-					<Box sx={{ display: 'flex', alignItems: 'center' }}>
-						<Button
+				<MUITCell sx={{ textAlign: 'center' }}>
+					<MUIBox sx={{ display: 'flex', alignItems: 'center' }}>
+						<MUIButton
 							variant='outlined'
 							size='small'
 							sx={{
@@ -39,9 +45,9 @@ export default function CartDetails(props) {
 							disabled={productCart.quantity >= product.quantityInStock}
 						>
 							+
-						</Button>
-						<Typography sx={{ padding: '5px' }}>{productCart.quantity}</Typography>
-						<Button
+						</MUIButton>
+						<MUITypo sx={{ padding: '5px' }}>{productCart.quantity}</MUITypo>
+						<MUIButton
 							variant='outlined'
 							size='small'
 							sx={{
@@ -56,17 +62,17 @@ export default function CartDetails(props) {
 							disabled={productCart.quantity <= 1}
 						>
 							-
-						</Button>
-					</Box>
-					<Button onClick={() => onRemove(productCart.product_id)} sx={{ color: '#117A5D' }}>
+						</MUIButton>
+					</MUIBox>
+					<MUIButton onClick={() => onRemove(productCart.product_id)} sx={{ color: '#117A5D' }}>
 						Supprimer
-					</Button>
-				</TableCell>
+					</MUIButton>
+				</MUITCell>
 
-				<TableCell sx={{ textAlign: 'right' }}>
-					<Typography>{((product.price * productCart.quantity) / 100).toFixed(2)} €</Typography>
-				</TableCell>
-			</TableRow>
+				<MUITCell sx={{ textAlign: 'right' }}>
+					<MUITypo>{((product.price * productCart.quantity) / 100).toFixed(2)} €</MUITypo>
+				</MUITCell>
+			</MUITRow>
 		)
 	);
 }
