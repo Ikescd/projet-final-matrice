@@ -27,6 +27,14 @@ export default function CartDetails(props) {
 						<Button
 							variant='outlined'
 							size='small'
+							sx={{
+								color: '#117A5D',
+								borderColor: '#117A5D',
+								':hover': {
+									backgroundColor: '#117A5D',
+									color: 'white',
+								},
+							}}
 							onClick={() => onUpdate(productCart.product_id, productCart.quantity + 1)}
 							disabled={productCart.quantity >= product.quantityInStock}
 						>
@@ -36,13 +44,23 @@ export default function CartDetails(props) {
 						<Button
 							variant='outlined'
 							size='small'
+							sx={{
+								color: '#117A5D',
+								borderColor: '#117A5D',
+								':hover': {
+									backgroundColor: '#117A5D',
+									color: 'white',
+								},
+							}}
 							onClick={() => onUpdate(productCart.product_id, productCart.quantity - 1)}
 							disabled={productCart.quantity <= 1}
 						>
 							-
 						</Button>
 					</Box>
-					<Button onClick={() => onRemove(productCart.product_id)}>Supprimer</Button>
+					<Button onClick={() => onRemove(productCart.product_id)} sx={{ color: '#117A5D' }}>
+						Supprimer
+					</Button>
 				</TableCell>
 
 				<TableCell sx={{ textAlign: 'right' }}>

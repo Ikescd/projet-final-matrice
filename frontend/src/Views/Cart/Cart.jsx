@@ -10,9 +10,10 @@ function Cart() {
 		return localCart
 			? JSON.parse(localCart)
 			: [
-					{ product_id: 1, quantity: 2 },
-					{ product_id: 5, quantity: 1 },
-					{ product_id: 8, quantity: 1 },
+					/* Uncomment to add a dummy cart */
+					// { product_id: 1, quantity: 2 },
+					// { product_id: 5, quantity: 1 },
+					// { product_id: 8, quantity: 1 },
 			  ];
 	});
 	const [isLoading, setIsLoading] = useState(true);
@@ -60,9 +61,9 @@ function Cart() {
 	return (
 		<Box sx={{ margin: '0 auto' }}>
 			<Box id='goToHomepage'>
-				<Link href='/' sx={{ display: 'flex' }}>
-					<KeyboardArrowLeftIcon />
-					<Typography>Retour à l'accueil</Typography>
+				<Link href='/' sx={{ display: 'flex', textDecoration: 'none' }}>
+					<KeyboardArrowLeftIcon sx={{ color: '#117A5D' }} />
+					<Typography sx={{ color: '#117A5D' }}>Retour à l'accueil</Typography>
 				</Link>
 			</Box>
 
@@ -100,7 +101,9 @@ function Cart() {
 								margin: '15px',
 							}}
 						>
-							<Button variant='contained'>Passer la commande</Button>
+							<Button variant='contained' sx={{ backgroundColor: '#117A5D' }}>
+								Passer la commande
+							</Button>
 						</LinkDOM>
 					</>
 				)}
