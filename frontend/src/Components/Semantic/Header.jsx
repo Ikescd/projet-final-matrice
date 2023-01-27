@@ -24,6 +24,7 @@ export default function Header() {
 				.catch((err) => console.error(err));
 		}
 	});
+
 	return (
 		<Box sx={{ marginBottom: 5 }}>
 			<AppBar position='static' sx={{ backgroundColor: '#117A5D' }}>

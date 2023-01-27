@@ -8,7 +8,7 @@ import CategoryDetails from './Views/Categories/CategoryDetails';
 
 import Cart from './Views/Cart/Cart';
 import { Typography } from '@mui/material';
-import Order from './Views/Cart/Order';
+import Order from './Views/Order.jsx/ToOrder';
 
 function App() {
 	return (
