@@ -25,7 +25,7 @@ export default function SignUp() {
       return;
     }
 
-    // utilizza il token per effettuare la richiesta di creazione utente
+    // utilise le token pour effectuer la req de creation user
     const dataObj = {
       first_name: data.get("firstName"),
       last_name: data.get("lastName"),
@@ -82,9 +82,17 @@ export default function SignUp() {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
+            <LockOutlinedIcon
+              sx={{
+                fontSize: 50,
+                backgroundColor: "#15684C",
+                padding: "10px",
+                borderRadius: "50px",
+                color: "white",
+              }}
+            />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" sx={{color: "#117A5D", fontFamily:"Time new roman"}}>
             Inscription
           </Typography>
           <Box
@@ -103,6 +111,12 @@ export default function SignUp() {
                   id="firstName"
                   label="Prénom"
                   autoFocus
+                  sx={{ 
+                    margin: "10px 0 5px 0",
+                    label: {color: "#117A5D", fontFamily: "Time new roman"},
+                    input: {color: "#117A5D", fontFamily: "Time new roman"},
+                    fielset: {color: "#117A5D"}
+                   }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -113,6 +127,12 @@ export default function SignUp() {
                   label="Nom"
                   name="lastName"
                   autoComplete="family-name"
+                  sx={{ 
+                    margin: "10px 0 5px 0",
+                    label: {color: "#117A5D", fontFamily: "Time new roman"},
+                    input: {color: "#117A5D", fontFamily: "Time new roman"},
+                    fielset: {color: "#117A5D"}
+                   }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -123,6 +143,12 @@ export default function SignUp() {
                   label="Email"
                   name="email"
                   autoComplete="email"
+                  sx={{ 
+                    margin: "10px 0 5px 0",
+                    label: {color: "#117A5D", fontFamily: "Time new roman"},
+                    input: {color: "#117A5D", fontFamily: "Time new roman"},
+                    fielset: {color: "#117A5D"}
+                   }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -134,6 +160,12 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  sx={{ 
+                    margin: "10px 0 5px 0",
+                    label: {color: "#117A5D", fontFamily: "Time new roman"},
+                    input: {color: "#117A5D", fontFamily: "Time new roman"},
+                    fielset: {color: "#117A5D"}
+                   }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -145,6 +177,12 @@ export default function SignUp() {
                   type="password"
                   id="confirm_password"
                   autoComplete="new-password"
+                  sx={{ 
+                    margin: "10px 0 5px 0",
+                    label: {color: "#117A5D", fontFamily: "Time new roman"},
+                    input: {color: "#117A5D", fontFamily: "Time new roman"},
+                    fielset: {color: "#117A5D"}
+                   }}
                 />
               </Grid>
             </Grid>
@@ -152,13 +190,23 @@ export default function SignUp() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ 
+                mt: 3, mb: 2,
+                marginBottom: "10px",
+                bgcolor: "#117A5D",
+                ":hover": {
+                  bgcolor: "#fff",
+                  color: "#117A5D",
+                  border: "1px solid #117A5D"},
+                  fontFamily:"Time new roman"
+              
+              }}
             >
               S'inscrire
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="./Login" variant="body2">
+                <Link href="./Login" variant="body2" sx={{color: "#117A5D", fontFamily:"Time new roman"}}>
                   Déjà enregistré ? Login
                 </Link>
               </Grid>

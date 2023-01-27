@@ -60,13 +60,13 @@ export default function Login() {
       <LockOutlinedIcon
         sx={{
           fontSize: 50,
-          backgroundColor: "green",
+          backgroundColor: "#15684C",
           padding: "10px",
           borderRadius: "50px",
           color: "white",
         }}
       />
-      <Typography variant="h6">Connexion</Typography>
+      <Typography variant="h6" sx={{color: "#117A5D", fontFamily:"Time new roman"}}>Connexion</Typography>
 
       <FormControl>
         <TextField
@@ -75,30 +75,50 @@ export default function Login() {
           name="email"
           variant="outlined"
           helperText=""
-          sx={{ margin: "10px 0 5px 0" }}
+          sx={{ 
+            margin: "10px 0 5px 0",
+            label: {color: "#117A5D", fontFamily: "Time new roman"},
+            input: {color: "#117A5D", fontFamily: "Time new roman"},
+            fielset: {color: "#117A5D"}
+           }}
           onChange={handleChange}
           required
         />
         <TextField
           id="outlined-basic"
           label="Password"
+          type="password"
           variant="outlined"
           name="password"
           helperText=""
-          sx={{ margin: "5px 0 10px 0" }}
+          sx={{ 
+            margin: "5px 0 10px 0", 
+            label: {color: "#117A5D", fontFamily: "Time new roman"},
+            input: {color: "#117A5D", fontFamily: "Time new roman"},
+            fielset: {color: "#117A5D"},
+          }}
           onChange={handleChange}
           required
         />
         <Button
           onClick={handleSubmit}
           variant="contained"
-          sx={{ marginBottom: "10px" }}
+          sx={{ 
+            marginBottom: "10px",
+            bgcolor: "#117A5D",
+            ":hover": {
+              bgcolor: "#fff",
+              color: "#117A5D",
+              border: "1px solid #117A5D"},
+              fontFamily:"Time new roman"
+
+         }}
         >
           Se connecter
         </Button>
       </FormControl>
-      <Link href="/passwordReset">Mot de passe oublié ?</Link>
-      <Link href="/register">Pas encore de compte ? Inscrivez-vous</Link>
+      <Link href="/passwordReset" sx={{color: "#117A5D"}}>Mot de passe oublié ?</Link>
+      <Link href="/register" sx={{color: "#117A5D"}}>Pas encore de compte ? Inscrivez-vous</Link>
     </Box>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import UserContext from '../../Context/UserContext'
+import {UserContext} from '../../Context/UserContext'
 import { Box, AppBar, Toolbar, Link, Button, Typography } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -14,13 +14,19 @@ export default function Header(props) {
 			fetch('http://localhost:3000/api/users/' + user.id)
 				.then((res) => res.json())
 				.then((user) => {
-					let firstName = user.first_name.toLowerCase();
+					let firstName = user[0].first_name.toLowerCase();
 					firstName = firstName[0].toUpperCase() + firstName.substr(1);
 					setFirstName(firstName);
 				})
 				.catch((err) => console.error(err));
 		}
 	});
+
+	const handleLogout = () => {
+		localStorage.removeItem('token');
+		window.location.href = '/';
+	};
+
 	return (
 		<Box sx={{ marginBottom: 5 }}>
 			<AppBar position='static' sx={{ backgroundColor: '#117A5D' }}>
@@ -48,7 +54,7 @@ export default function Header(props) {
 							<Link href='/cart'>
 								<ShoppingCartIcon sx={{ margin: '0 15px', color: 'white' }} />
 							</Link>
-							<Link onClick={() => alert('tu es pas déconnecté.e / fonction à faire bisou')}>
+							<Link onClick={handleLogout}>
 								<LogoutIcon sx={{ margin: '0 15px', color: 'white' }} />
 							</Link>
 						</Box>
@@ -56,10 +62,10 @@ export default function Header(props) {
 
 					{!user.isLogged && (
 						<Box sx={{ flex: 1, textAlign: 'end' }}>
-							<Button color='inherit' href='/signup'>
+							<Button color='inherit' href='/signup' sx={{fontFamily: "Time new roman"}} >
 								INSCRIPTION
 							</Button>
-							<Button color='inherit' href='/login'>
+							<Button color='inherit' href='/login' sx={{fontFamily: "Time new roman"}}>
 								CONNEXION
 							</Button>
 						</Box>
