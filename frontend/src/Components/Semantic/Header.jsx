@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import UserContext from '../../Context/UserContext'
 import { Box, AppBar, Toolbar, Link, Button, Typography } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LogoutIcon from '@mui/icons-material/Logout';
 import logo from '../../Assets/logo.png';
 
-export default function Header() {
-	// à remplacer par {user} = useContext(UserContext)
-	const [user, setUser] = useState({
-		id: 1,
-		isLogged: true,
-	});
+export default function Header(props) {
+	const {user} = useContext(UserContext);
 	const [firstName, setFirstName] = useState();
 
 	useEffect(() => {
@@ -17,7 +14,7 @@ export default function Header() {
 			fetch('http://localhost:3000/api/users/' + user.id)
 				.then((res) => res.json())
 				.then((user) => {
-					let firstName = user[0].first_name.toLowerCase();
+					let firstName = user.first_name.toLowerCase();
 					firstName = firstName[0].toUpperCase() + firstName.substr(1);
 					setFirstName(firstName);
 				})

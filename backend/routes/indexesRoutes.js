@@ -1,5 +1,6 @@
 const productsRoutes = require("./products/productsRoutes");
 const categoriesRoutes = require("./categories/categoriesRoutes");
+const usersRoutes = require ('./usersRoutes')
 
 const indexesRoutes = (app, db) => {
   // Products routes
@@ -12,6 +13,9 @@ const indexesRoutes = (app, db) => {
   categoriesRoutes.getProductsByCategory(app, db);
   categoriesRoutes.getOneCategory(app, db);
   categoriesRoutes.createCategory(app, db);
+
+  // Users routes
+  usersRoutes(app, db)
 };
 
 module.exports = indexesRoutes;

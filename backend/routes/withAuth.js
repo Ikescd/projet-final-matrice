@@ -3,21 +3,20 @@ const jwt = require("jsonwebtoken");
 const secretKey = process.env.SECRET_KEY;
 
 
-function authMiddleware(req, res, next) {
+function withAuth(req, res, next) {
   const token = req.headers["Authorization"];
   if (token === null || token === undefined) {
       return res.status(401).json({ message: "Token not provided" });
-    }
-  
-    try {
-      const decoded = jwt.verify(token, secretKey);
-      req.user = decoded;
+    }  
+    jwt.verify(token, secretKey, function (err, decoded) {
+      if (err) {
+        res.status(401).json({ msg: "Bad token" });
+      }
+      req.body.id = decoded.id;
       next();
-    } catch (err) {
-      return res.status(401).json({ message: "Invalid token" });
-    }
+    });
   }
 
-    module.exports = authMiddleware;
+    module.exports = withAuth;
 
     

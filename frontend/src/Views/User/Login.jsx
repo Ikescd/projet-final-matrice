@@ -9,7 +9,7 @@ import {
   Link,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { UserContext } from "./UserContext";
+import { UserContext } from "../../Context/UserContext";
 
 export default function Login() {
   const [logs, setLogs] = useState({

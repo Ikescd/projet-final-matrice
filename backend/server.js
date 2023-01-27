@@ -1,6 +1,5 @@
 require('dotenv').config();
 
-const authMiddleware = require('./routes/authMiddleware')
 const express = require('express');
 const app = express();
 const mysql = require('mysql');
@@ -9,7 +8,7 @@ const cors = require('cors');
 
 const indexesRoutes = require('./routes/indexesRoutes')
 
-const usersRoutes = require ('./routes/usersRoutes')
+
 
 const corsOptions = {
 	origin: '*',
@@ -20,7 +19,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// app.use("/api/users", authMiddleware, usersRoutes);
+// app.use("/api/users", withAuth, usersRoutes);
 
 
 const port = process.env.PORT || 8080;
@@ -40,7 +39,8 @@ app.get('/', (req, res) => {
 	res.send('oui');
 });
 
-usersRoutes(app, connection)
+indexesRoutes(app, connection)
+
 
 app.listen(port, () => {
 	console.log(`bien connecté au port ${port}`);

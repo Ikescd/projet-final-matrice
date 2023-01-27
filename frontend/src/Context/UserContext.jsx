@@ -5,7 +5,7 @@ export const UserContext = createContext();
 export default function UserProvider(props) {
   const [user, setUser] = useState({
     isLogged: false,
-    _id: null
+    id: null
   })
 
   return (

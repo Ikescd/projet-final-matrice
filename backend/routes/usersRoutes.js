@@ -1,13 +1,8 @@
 require("dotenv").config();
 
-const express = require("express");
-const { check, validationResult } = require("express-validator");
-const app = express();
-const mysql = require("mysql");
-
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const authMiddleware = require("./authMiddleware");
+const withAuth = require("./withAuth");
 
 function usersRoutes(app, connection) {
   const secretKey = process.env.SECRET_KEY
@@ -51,7 +46,7 @@ function usersRoutes(app, connection) {
       (err, result) => {
         let user = result[0];
         if (!user) {
-          res.status(401).json({ message: "Invalid email" });
+          return res.status(401).send({ message: "Invalid email" });
         }
         bcrypt.compare(password, user.password).then((match) => {
           if (!match) {
@@ -61,6 +56,19 @@ function usersRoutes(app, connection) {
             res.json({ status: 200, token, user: user})
         })
       });
+  });
+
+  app.get("/api/login/checkToken", /*withAuth,*/ async (req, res) => {
+    const id = req.params.id
+    await connection.query(
+      "SELECT * FROM users WHERE id = ? ",
+      [id],
+      (err, result) => {
+        let user = result[0];
+        if (user === null || user === undefined)
+        return res.status(400).send("User not found");
+        else res.status(200).json({message: "token ok", user: user})
+      })
   });
 
   //Read all users
@@ -79,10 +87,14 @@ function usersRoutes(app, connection) {
       `SELECT * FROM users WHERE id = ?`,
       [id],
       (err, result) => {
-        if (err) throw err;
-        res.json({ status: 200, result });
-      }
-    );
+        let user = result[0];
+        if (user === null || user === undefined)
+        return res.status(400).send("User not found");
+        else {
+          console.log(user.id)
+          res.status(200).send(user)
+        }
+      })
   });
 
   //Update one user(TODO)
