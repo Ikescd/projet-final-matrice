@@ -5,15 +5,15 @@ import Products from './Views/Products/Products';
 import Layout from './Components/Layout';
 import Categories from './Views/Categories/Categories';
 import CategoryDetails from './Views/Categories/CategoryDetails';
+import TopSection from './Views/TopSection';
 
 import Cart from './Views/Cart/Cart';
-import { Typography } from '@mui/material';
 
 function App() {
-	return (
-		<Router>
-			<Layout>
-				<Routes>
+  return (
+    <Router>
+      <Layout>
+        <Routes>
 					<Route path='/' element={<Homepage />} />
 
 					<Route path='/login' element={<UnderConstruction />} />
@@ -33,37 +33,33 @@ function App() {
 
 					<Route path='/404' element={<NotFound />} />
 					<Route path='*' element={<Navigate to='/404' replace />} />
-				</Routes>
-			</Layout>
-		</Router>
-	);
+        </Routes>
+      </Layout>
+    </Router>
+  );
 }
 
 const UnderConstruction = () => {
-	return (
-		<>
-			<p>Site en construction, revenez plus tard.</p>
+  return (
+    <>
+      <p>Site en construction, revenez plus tard.</p>
 			<a href='/'>Retour à l'accueil</a>
-		</>
-	);
+    </>
+  );
 };
 
 const NotFound = () => {
-	return <>Page not found !</>;
+  return <>Page not found !</>;
 };
 
 const Homepage = () => {
-	return (
-		<>
-			<Typography sx={{ textAlign: 'center', fontSize: '1.2em' }}>
-				Bienvenue sur le site de <strong>Recycle-RAT</strong>,<br />
-				le paRATdis des écolos à petits budgets !
-			</Typography>
-
-			<Categories />
-			<Products />
-		</>
-	);
+  return (
+    <>
+      <TopSection />
+      <Categories />
+      <Products />
+    </>
+  );
 };
 
 export default App;
