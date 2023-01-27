@@ -8,6 +8,7 @@ import CategoryDetails from './Views/Categories/CategoryDetails';
 
 import Cart from './Views/Cart/Cart';
 import { Typography } from '@mui/material';
+import Order from './Views/Cart/Order';
 
 function App() {
 	return (
@@ -27,7 +28,7 @@ function App() {
 					<Route path='/categories/:id' element={<CategoryDetails />} />
 
 					<Route path='/cart' element={<Cart />} />
-					<Route path='/to-order' element={<UnderConstruction />} />
+					<Route path='/to-order' element={<Order />} />
 					<Route path='/orders' element={<UnderConstruction />} />
 					<Route path='/orders/:id' element={<UnderConstruction />} />
 
