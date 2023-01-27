@@ -1,13 +1,13 @@
-function productsRoutes(app, db) {
-  // get all products
+function getAllProducts(app, db) {
   app.get("/api/products", async (req, res) => {
     await db.query(`SELECT * FROM products`, (err, result) => {
       if (err) throw err;
-      res.json({ status: 200, result });
+      res.status(200).send(result);
     });
   });
+}
 
-  // get one product
+function getOneProduct(app, db) {
   app.get("/api/products/:id", async (req, res) => {
     const id = req.params.id;
 
@@ -16,12 +16,13 @@ function productsRoutes(app, db) {
       [id],
       (err, result) => {
         if (err) throw err;
-        res.json({ status: 200, result });
+        res.status(200).send(result);
       }
     );
   });
+}
 
-  //Create product
+function createProduct(app, db) {
   app.post("/api/products", async (req, res) => {
     if (
       req.body.name &&
@@ -51,29 +52,26 @@ function productsRoutes(app, db) {
         ],
         (err, result) => {
           if (err) throw err;
-          res.json({ status: 200, result });
+          res.status(200).send(result);
         }
       );
     } else {
       res.sendStatus(422);
     }
   });
+}
 
-  /*
-  TODO : creation des routes pour supprimer ou modifier un produit
-  
+//TODO : creation des routes pour supprimer ou modifier un produit
+/*
   // Update product
   app.put("/api/products/:id", async (req, res) => {});
 
   // Delete product
   app.delete("/api/products/:id", async (req, res) => {
     const id = req.params.id;
-    // const responseDB = await db.query(`DELETE FROM products WHERE id = ?`, [
-    //   id,
-    // ]);
-    // res.json({ status: 200, responseDB });
+    await db.query(`DELETE FROM products WHERE id = ?`, [id]);
+    res.status(200).send(result);
   });
   */
-}
 
-module.exports = productsRoutes;
+module.exports = { getAllProducts, getOneProduct, createProduct };

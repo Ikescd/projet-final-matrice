@@ -8,10 +8,9 @@ export default function CartDetails(props) {
 	useEffect(() => {
 		fetch('http://localhost:3000/api/products/' + id)
 			.then((res) => res.json())
-			.then((data) => setProduct(data.result[0]));
+			.then((data) => setProduct(data[0]));
 	}, []);
 
-	console.log(product);
 	return (
 		product !== undefined && (
 			<TableRow>

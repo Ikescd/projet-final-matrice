@@ -2,8 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import ProductDetails from './Views/Products/ProductDetails';
 import Products from './Views/Products/Products';
+import Layout from './Components/Layout';
+import Categories from './Views/Categories/Categories';
+import CategoryDetails from './Views/Categories/CategoryDetails';
 
 import Cart from './Views/Cart/Cart';
+import { Typography } from '@mui/material';
 
 function App() {
 	return (
@@ -20,6 +24,7 @@ function App() {
 
 					<Route path='/products' element={<Products />} />
 					<Route path='/products/:id' element={<ProductDetails />} />
+					<Route path='/categories/:id' element={<CategoryDetails />} />
 
 					<Route path='/cart' element={<Cart />} />
 					<Route path='/to-order' element={<UnderConstruction />} />
@@ -33,10 +38,6 @@ function App() {
 		</Router>
 	);
 }
-
-const Layout = (props) => {
-	return <div>{props.children}</div>;
-};
 
 const UnderConstruction = () => {
 	return (
@@ -54,8 +55,13 @@ const NotFound = () => {
 const Homepage = () => {
 	return (
 		<>
-			Bienvenue sur le site de Recycle-RAT
-			<a href='/cart'>Le panier</a>
+			<Typography sx={{ textAlign: 'center', fontSize: '1.2em' }}>
+				Bienvenue sur le site de <strong>Recycle-RAT</strong>,<br />
+				le paRATdis des écolos à petits budgets !
+			</Typography>
+
+			<Categories />
+			<Products />
 		</>
 	);
 };

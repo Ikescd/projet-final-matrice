@@ -6,7 +6,7 @@ const mysql = require('mysql');
 
 const cors = require('cors');
 
-const productsRoutes = require('./routes/products/productsRoutes');
+const indexesRoutes = require('./routes/indexesRoutes')
 
 const corsOptions = {
 	origin: '*',
@@ -40,8 +40,14 @@ app.get('/api/users', (req, res) => {
 		return res.send(result);
 	});
 });
+app.get('/api/users/:id', (req, res) => {
+	connection.query('SELECT * FROM users WHERE id=' + req.params.id, (err, result) => {
+		if (err) return res.sendStatus(400);
+		return res.send(result);
+	});
+});
 
-productsRoutes(app, connection);
+indexesRoutes(app, connection);
 
 app.listen(port, () => {
 	console.log(`bien connecté au port ${port}`);
