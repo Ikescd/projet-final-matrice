@@ -35,7 +35,7 @@ export default function CategoryDetails() {
       .catch((err) => console.error(err));
   }, [params.id]);
 
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (event, newPage) => {
@@ -67,7 +67,11 @@ export default function CategoryDetails() {
         to={`/products/${product.id}`}
         underline="none"
       >
-        <CardMedia component="img" height="140" image={product.picture} />
+        <CardMedia
+          component="img"
+          sx={{ height: "140px" }}
+          image={product.picture}
+        />
         <CardContent
           sx={{
             bgcolor: "#ECF0C6",
@@ -140,7 +144,7 @@ export default function CategoryDetails() {
       <TablePagination
         sx={{ mx: "auto" }}
         component="div"
-        count={100}
+        count={productsByCategory.length}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}

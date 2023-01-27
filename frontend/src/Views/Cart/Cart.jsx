@@ -1,19 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Button, Link, Typography } from '@mui/material';
+import { Link as LinkDOM } from 'react-router-dom';
 import CartList from './CartList';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 function Cart() {
 	const [cart, setCart] = useState(() => {
 		const localCart = localStorage.getItem('cart');
-		return localCart ? JSON.parse(localCart) : [];
+		return localCart
+			? JSON.parse(localCart)
+			: [
+					{ product_id: 1, quantity: 2 },
+					{ product_id: 5, quantity: 1 },
+					{ product_id: 8, quantity: 1 },
+			  ];
 	});
 	const [productsToOrder, setProductsToOrder] = useState();
 	const [isLoading, setIsLoading] = useState(true);
+	const [totalCart, setTotalCart] = useState([]);
+	const [productsInCart, setProductsInCart] = useState([]);
 
 	useEffect(() => {
 		localStorage.setItem('cart', JSON.stringify(cart));
 		setIsLoading(false);
+		let productsList = [];
+
+		let total = 0;
+		cart.map((el) => {
+			fetch('http://localhost:3000/api/products/' + el.product_id)
+				.then((res) => res.json())
+				.then((data) => {
+					let totalProd = data[0].price * el.quantity;
+					total = total + totalProd;
+					productsList.push({ product: data[0], buyingQuantity: el.quantity });
+					setProductsInCart(productsList);
+					setTotalCart(total);
+				})
+				.catch((err) => console.error(err));
+			return el;
+		});
 	}, [cart]);
 
 	const updateProduct = (productId, updatedQuantity) => {
@@ -47,25 +72,39 @@ function Cart() {
 					Mon panier
 				</Typography>
 
-				{!isLoading && (
-					<CartList
-						cart={cart}
-						onUpdate={updateProduct}
-						onRemove={removeProduct}
-						productsToOrder={productsToOrder}
-						setProductsToOrder={setProductsToOrder}
-					/>
-				)}
-
+				{/* Panier en cours de chargement */}
 				{isLoading && <Typography>Chargement de votre panier...</Typography>}
 
-				{!isLoading && cart.length == 0 && (
+				{/* Panier chargé, mais vide  */}
+				{!isLoading && cart.length === 0 && (
 					<Typography>
 						Il n'y a rien dans votre panier. Voulez-vous faire quelques achats ?
 					</Typography>
 				)}
 
-				<Button href='/to-order'>Passer la commande</Button>
+				{/* Panier chargé et non-vide  */}
+				{!isLoading && (
+					<>
+						<CartList cart={cart} onUpdate={updateProduct} onRemove={removeProduct} />
+
+						<Typography sx={{ textAlign: 'center', marginTop: '25px' }}>
+							Total de la commande : {totalCart / 100} €
+						</Typography>
+
+						<LinkDOM
+							to='/to-order'
+							state={{ products: productsInCart, total: totalCart }}
+							style={{
+								textDecoration: 'none',
+								display: 'flex',
+								justifyContent: 'center',
+								margin: '15px',
+							}}
+						>
+							<Button variant='contained'>Passer la commande</Button>
+						</LinkDOM>
+					</>
+				)}
 			</Box>
 		</Box>
 	);

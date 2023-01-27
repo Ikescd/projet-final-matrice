@@ -12,19 +12,18 @@ import {
 } from "@mui/material";
 
 export default function Products() {
-  // const { products } = require("../../Helpers/FakeData.js");
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:3000/api/products")
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data.result);
+        setProducts(data);
       })
       .catch((err) => console.error(err));
   }, []);
 
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (event, newPage) => {
@@ -59,11 +58,15 @@ export default function Products() {
               to={`/products/${product.id}`}
               underline="none"
             >
-              <CardMedia component="img" height="140" image={product.picture} />
+              <CardMedia
+                component="img"
+                image={product.picture}
+                sx={{ height: "140px" }}
+              />
               <CardContent
                 sx={{
                   bgcolor: "#ECF0C6",
-                  minHeight: "95px",
+                  minHeight: "135px",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
@@ -97,7 +100,7 @@ export default function Products() {
       <TablePagination
         sx={{ mx: "auto" }}
         component="div"
-        count={100}
+        count={products.length}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}
