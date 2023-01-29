@@ -81,6 +81,7 @@ export default function Login() {
             input: {color: "#117A5D", fontFamily: "Time new roman"},
             fielset: {color: "#117A5D"}
            }}
+          color="success"
           onChange={handleChange}
           required
         />
@@ -97,6 +98,7 @@ export default function Login() {
             input: {color: "#117A5D", fontFamily: "Time new roman"},
             fielset: {color: "#117A5D"},
           }}
+          color="success"
           onChange={handleChange}
           required
         />
@@ -111,7 +113,6 @@ export default function Login() {
               color: "#117A5D",
               border: "1px solid #117A5D"},
               fontFamily:"Time new roman"
-
          }}
         >
           Se connecter

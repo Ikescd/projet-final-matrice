@@ -19,7 +19,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// app.use("/api/users", withAuth, usersRoutes);
+// app.use("/api/login/checkToken", withAuth, usersRoutes);
 
 
 const port = process.env.PORT || 8080;

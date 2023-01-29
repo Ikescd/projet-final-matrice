@@ -14,7 +14,7 @@ export default function Header(props) {
 			fetch('http://localhost:3000/api/users/' + user.id)
 				.then((res) => res.json())
 				.then((user) => {
-					let firstName = user[0].first_name.toLowerCase();
+					let firstName = user.first_name.toLowerCase();
 					firstName = firstName[0].toUpperCase() + firstName.substr(1);
 					setFirstName(firstName);
 				})
@@ -42,7 +42,7 @@ export default function Header(props) {
 				>
 					<Box sx={{ flex: 1 }}>
 						<Link href='/' sx={{ color: 'white' }}>
-							<img src={logo} alt='Recycle-rat logo' style={{ width: 50 }} />
+							<img src={logo} alt='Recycle-rat logo' style={{ width: 55 }} />
 						</Link>
 					</Box>
 

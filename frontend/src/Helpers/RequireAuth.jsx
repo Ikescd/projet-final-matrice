@@ -1,3 +1,4 @@
+
 import React, { useEffect, useContext, useState } from 'react'
 import { UserContext } from '../Context/UserContext'
 import { Navigate } from 'react-router-dom'
@@ -10,9 +11,9 @@ export default function RequireAuth({ children, withAuth }) {
     const token = window.localStorage.getItem('token')
 
     if (token !== null) {
-      fetch('http://localhost:3000/api/login/checkToken', {
+      fetch('http://localhost:3000/api/users/login/checkToken', {
         method: 'GET',
-        headers: { Authorization: token }
+        headers: { authorization: token }
       })
         .then((response) => {
           return response.json()

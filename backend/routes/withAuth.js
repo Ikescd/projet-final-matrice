@@ -4,7 +4,7 @@ const secretKey = process.env.SECRET_KEY;
 
 
 function withAuth(req, res, next) {
-  const token = req.headers["Authorization"];
+  const token = req.headers["authorization"];
   if (token === null || token === undefined) {
       return res.status(401).json({ message: "Token not provided" });
     }  

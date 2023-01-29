@@ -52,21 +52,21 @@ function usersRoutes(app, connection) {
           if (!match) {
               return res.status(401).json({ message: "Invalid password" });
             }
-            const token = jwt.sign({ id: user.id }, secretKey, {expiresIn: "24h"});
+            const token = jwt.sign({ id: user.id }, secretKey, {expiresIn: "50h"});
             res.json({ status: 200, token, user: user})
         })
       });
   });
 
-  app.get("/api/login/checkToken", /*withAuth,*/ async (req, res) => {
-    const id = req.params.id
+  app.get("/api/users/login/checkToken", /*withAuth,*/ async (req, res) => {
+    const id = req.body.id
     await connection.query(
       "SELECT * FROM users WHERE id = ? ",
       [id],
       (err, result) => {
         let user = result[0];
         if (user === null || user === undefined)
-        return res.status(400).send("User not found");
+         return res.status(400).send( "User not found");
         else res.status(200).json({message: "token ok", user: user})
       })
   });
@@ -91,7 +91,6 @@ function usersRoutes(app, connection) {
         if (user === null || user === undefined)
         return res.status(400).send("User not found");
         else {
-          console.log(user.id)
           res.status(200).send(user)
         }
       })
