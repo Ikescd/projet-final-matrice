@@ -111,7 +111,10 @@ function Cart() {
 								margin: '15px',
 							}}
 						>
-							<MUIButton variant='contained' sx={{ backgroundColor: '#117A5D' }}>
+							<MUIButton
+								variant='contained'
+								sx={{ backgroundColor: '#117A5D', marginBottom: '25px' }}
+							>
 								Passer la commande
 							</MUIButton>
 						</DOMLink>
