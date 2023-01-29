@@ -67,6 +67,7 @@ export default function ProductDetails() {
 		cartArr.push(newProduct);
 		setNewCart(cartArr);
 		localStorage.setItem('cart', JSON.stringify(cartArr));
+		handleOpen();
 	};
 
 	const handleQuantity = (event) => {
@@ -176,9 +177,9 @@ export default function ProductDetails() {
 					<Box
 						sx={{
 							display: 'flex',
-							flexDirection: 'row',
+							flexDirection: 'column',
 							flexWrap: 'wrap',
-							justifyContent: 'center',
+							alignItems: 'center',
 						}}
 					>
 						<Link component={RouterLink} to={'/'} underline='none'>
