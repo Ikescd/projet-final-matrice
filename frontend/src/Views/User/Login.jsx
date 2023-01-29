@@ -8,8 +8,13 @@ import {
   Typography,
   Link,
 } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { UserContext } from "../../Context/UserContext";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme();
 
 export default function Login() {
   const [logs, setLogs] = useState({
@@ -48,78 +53,93 @@ export default function Login() {
   }
 
   return (
-    <Box
-      sx={{
-        margin: "auto",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <LockOutlinedIcon
-        sx={{
-          fontSize: 50,
-          backgroundColor: "#15684C",
-          padding: "10px",
-          borderRadius: "50px",
-          color: "white",
-        }}
-      />
-      <Typography variant="h6" sx={{color: "#117A5D", fontFamily:"Time new roman"}}>Connexion</Typography>
-
-      <FormControl>
-        <TextField
-          id="outlined-basic"
-          label="Email address"
-          name="email"
-          variant="outlined"
-          helperText=""
-          sx={{ 
-            margin: "10px 0 5px 0",
-            label: {color: "#117A5D", fontFamily: "Time new roman"},
-            input: {color: "#117A5D", fontFamily: "Time new roman"},
-            fielset: {color: "#117A5D"}
-           }}
-          color="success"
-          onChange={handleChange}
-          required
-        />
-        <TextField
-          id="outlined-basic"
-          label="Password"
-          type="password"
-          variant="outlined"
-          name="password"
-          helperText=""
-          sx={{ 
-            margin: "5px 0 10px 0", 
-            label: {color: "#117A5D", fontFamily: "Time new roman"},
-            input: {color: "#117A5D", fontFamily: "Time new roman"},
-            fielset: {color: "#117A5D"},
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            margin: "auto",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
           }}
-          color="success"
-          onChange={handleChange}
-          required
-        />
-        <Button
-          onClick={handleSubmit}
-          variant="contained"
-          sx={{ 
-            marginBottom: "10px",
-            bgcolor: "#117A5D",
-            ":hover": {
-              bgcolor: "#fff",
-              color: "#117A5D",
-              border: "1px solid #117A5D"},
-              fontFamily:"Time new roman"
-         }}
         >
-          Se connecter
-        </Button>
-      </FormControl>
-      <Link href="/passwordReset" sx={{color: "#117A5D"}}>Mot de passe oublié ?</Link>
-      <Link href="/register" sx={{color: "#117A5D"}}>Pas encore de compte ? Inscrivez-vous</Link>
-    </Box>
+          <LockOutlinedIcon
+            sx={{
+              fontSize: 50,
+              backgroundColor: "#15684C",
+              padding: "10px",
+              borderRadius: "50px",
+              color: "white",
+            }}
+          />
+          <Typography
+            variant="h6"
+            sx={{ color: "#117A5D", fontFamily: "Time new roman" }}
+          >
+            Connexion
+          </Typography>
+
+          <FormControl>
+            <TextField
+              id="outlined-basic"
+              label="Email address"
+              name="email"
+              variant="outlined"
+              helperText=""
+              sx={{
+                margin: "10px 0 5px 0",
+                label: { color: "#117A5D", fontFamily: "Time new roman" },
+                input: { color: "#117A5D", fontFamily: "Time new roman" },
+                fielset: { color: "#117A5D" },
+              }}
+              color="success"
+              onChange={handleChange}
+              required
+            />
+            <TextField
+              id="outlined-basic"
+              label="Password"
+              type="password"
+              variant="outlined"
+              name="password"
+              helperText=""
+              sx={{
+                margin: "5px 0 10px 0",
+                label: { color: "#117A5D", fontFamily: "Time new roman" },
+                input: { color: "#117A5D", fontFamily: "Time new roman" },
+                fielset: { color: "#117A5D" },
+              }}
+              color="success"
+              onChange={handleChange}
+              required
+            />
+            <Button
+              onClick={handleSubmit}
+              variant="contained"
+              sx={{
+                marginBottom: "10px",
+                bgcolor: "#117A5D",
+                ":hover": {
+                  bgcolor: "#fff",
+                  color: "#117A5D",
+                  border: "1px solid #117A5D",
+                },
+                fontFamily: "Time new roman",
+              }}
+            >
+              Se connecter
+            </Button>
+          </FormControl>
+          <Link href="/passwordReset" sx={{ color: "#117A5D" }}>
+            Mot de passe oublié ?
+          </Link>
+          <Link href="/register" sx={{ color: "#117A5D" }}>
+            Pas encore de compte ? Inscrivez-vous
+          </Link>
+        </Box>
+      </Container>
+    </ThemeProvider>
   );
 }
