@@ -16,7 +16,7 @@ export default function Categories() {
 	}, []);
 
 	return (
-		<Box>
+		<Box sx={{ borderTop: ' thick double #117A5D', padding: '25px 0 50px 0' }}>
 			<Typography
 				variant='h4'
 				sx={{ color: '#117A5D', fontFamily: 'Time new roman', margin: 2, textAlign: 'center' }}
