@@ -18,8 +18,10 @@ export default function CartDetails(props) {
 					<img src={product.picture} alt={product.name} style={{ width: 150 }} />
 				</TableCell>
 				<TableCell>
-					<Typography>{product.name}</Typography>
-					<Typography>Prix à l'unité : {(product.price / 100).toFixed(2)} €</Typography>
+					<Typography sx={{ fontFamily: 'Times new roman' }}>{product.name}</Typography>
+					<Typography sx={{ fontFamily: 'Times new roman' }}>
+						Prix à l'unité : {(product.price / 100).toFixed(2)} €
+					</Typography>
 				</TableCell>
 
 				<TableCell sx={{ textAlign: 'center' }}>
@@ -40,7 +42,9 @@ export default function CartDetails(props) {
 						>
 							+
 						</Button>
-						<Typography sx={{ padding: '5px' }}>{productCart.quantity}</Typography>
+						<Typography sx={{ padding: '5px', fontFamily: 'Times new roman' }}>
+							{productCart.quantity}
+						</Typography>
 						<Button
 							variant='outlined'
 							size='small'
@@ -58,13 +62,18 @@ export default function CartDetails(props) {
 							-
 						</Button>
 					</Box>
-					<Button onClick={() => onRemove(productCart.product_id)} sx={{ color: '#117A5D' }}>
+					<Button
+						onClick={() => onRemove(productCart.product_id)}
+						sx={{ color: '#117A5D', fontFamily: 'Times new roman' }}
+					>
 						Supprimer
 					</Button>
 				</TableCell>
 
 				<TableCell sx={{ textAlign: 'right' }}>
-					<Typography>{((product.price * productCart.quantity) / 100).toFixed(2)} €</Typography>
+					<Typography sx={{ fontFamily: 'Times new roman' }}>
+						{((product.price * productCart.quantity) / 100).toFixed(2)} €
+					</Typography>
 				</TableCell>
 			</TableRow>
 		)

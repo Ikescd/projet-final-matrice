@@ -11,9 +11,9 @@ function Cart() {
 			? JSON.parse(localCart)
 			: [
 					/* Uncomment to add a dummy cart */
-					// { product_id: 1, quantity: 2 },
-					// { product_id: 5, quantity: 1 },
-					// { product_id: 8, quantity: 1 },
+					{ product_id: 1, quantity: 2 },
+					{ product_id: 5, quantity: 1 },
+					{ product_id: 8, quantity: 1 },
 			  ];
 	});
 	const [isLoading, setIsLoading] = useState(true);
@@ -63,21 +63,30 @@ function Cart() {
 			<Box id='goToHomepage'>
 				<Link href='/' sx={{ display: 'flex', textDecoration: 'none' }}>
 					<KeyboardArrowLeftIcon sx={{ color: '#117A5D' }} />
-					<Typography sx={{ color: '#117A5D' }}>Retour à l'accueil</Typography>
+					<Typography sx={{ color: '#117A5D', fontFamily: 'Times new roman' }}>
+						Retour à l'accueil
+					</Typography>
 				</Link>
 			</Box>
 
 			<Box id='cartContainer'>
-				<Typography variant='h5' sx={{ textAlign: 'center', margin: '50px' }}>
+				<Typography
+					variant='h4'
+					sx={{ textAlign: 'center', margin: '50px', fontFamily: 'Times new roman' }}
+				>
 					Mon panier
 				</Typography>
 
 				{/* Panier en cours de chargement */}
-				{isLoading && <Typography>Chargement de votre panier...</Typography>}
+				{isLoading && (
+					<Typography sx={{ fontFamily: 'Times new roman' }}>
+						Chargement de votre panier...
+					</Typography>
+				)}
 
 				{/* Panier chargé, mais vide  */}
 				{!isLoading && cart.length === 0 && (
-					<Typography>
+					<Typography sx={{ fontFamily: 'Times new roman' }}>
 						Il n'y a rien dans votre panier. Voulez-vous faire quelques achats ?
 					</Typography>
 				)}
@@ -87,7 +96,14 @@ function Cart() {
 					<>
 						<CartList cart={cart} onUpdate={updateProduct} onRemove={removeProduct} />
 
-						<Typography sx={{ textAlign: 'center', marginTop: '25px' }}>
+						<Typography
+							sx={{
+								textAlign: 'center',
+								marginTop: '25px',
+								fontFamily: 'Times new roman',
+								fontSize: '1.50em',
+							}}
+						>
 							Total de la commande : {totalCart / 100} €
 						</Typography>
 
@@ -101,7 +117,15 @@ function Cart() {
 								margin: '15px',
 							}}
 						>
-							<Button variant='contained' sx={{ backgroundColor: '#117A5D' }}>
+							<Button
+								variant='contained'
+								sx={{
+									backgroundColor: '#117A5D',
+									fontFamily: 'Times new roman',
+									fontSize: '1.25em',
+									marginBottom: '25px',
+								}}
+							>
 								Passer la commande
 							</Button>
 						</LinkDOM>

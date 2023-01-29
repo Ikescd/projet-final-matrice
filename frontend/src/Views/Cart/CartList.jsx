@@ -19,13 +19,17 @@ export default function CartList(props) {
 			<TableHead>
 				<TableRow>
 					<TableCell colSpan={2} sx={{ textAlign: 'center' }}>
-						<Typography>Produit</Typography>
+						<Typography sx={{ fontFamily: 'Times new roman', fontSize: '1.50em' }}>
+							Produit
+						</Typography>
 					</TableCell>
 					<TableCell sx={{ width: 150, textAlign: 'center' }}>
-						<Typography>Quantité</Typography>
+						<Typography sx={{ fontFamily: 'Times new roman', fontSize: '1.50em' }}>
+							Quantité
+						</Typography>
 					</TableCell>
 					<TableCell sx={{ textAlign: 'right' }}>
-						<Typography>Prix</Typography>
+						<Typography sx={{ fontFamily: 'Times new roman', fontSize: '1.50em' }}>Prix</Typography>
 					</TableCell>
 				</TableRow>
 			</TableHead>
