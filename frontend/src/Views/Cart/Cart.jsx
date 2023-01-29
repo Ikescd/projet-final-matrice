@@ -113,7 +113,11 @@ function Cart() {
 						>
 							<MUIButton
 								variant='contained'
-								sx={{ backgroundColor: '#117A5D', marginBottom: '25px' }}
+								sx={{
+									backgroundColor: '#117A5D',
+									marginBottom: '25px',
+									':hover': { backgroundColor: '#117A5D' },
+								}}
 							>
 								Passer la commande
 							</MUIButton>
