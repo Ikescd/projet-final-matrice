@@ -70,11 +70,11 @@ const TopSection = () => {
           <img
             src={topProduct.picture}
             style={{
-              maxWidth: "340px",
-              maxHeight: "200px",
+                            height: "200px",
               width: "auto",
               border: "1px solid #117A5D",
               borderRadius: 5,
+              objectFit:"cover"
             }}
           />
           <Typography
