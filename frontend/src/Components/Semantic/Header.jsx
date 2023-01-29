@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
-import {UserContext} from '../../Context/UserContext'
+import { UserContext } from '../../Context/UserContext';
 import { Box, AppBar, Toolbar, Link, Button, Typography } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LogoutIcon from '@mui/icons-material/Logout';
 import logo from '../../Assets/logo.png';
 
 export default function Header(props) {
-	const {user} = useContext(UserContext);
+	const { user } = useContext(UserContext);
 	const [firstName, setFirstName] = useState();
 
 	useEffect(() => {
@@ -14,8 +14,8 @@ export default function Header(props) {
 			fetch('http://localhost:3000/api/users/' + user.id)
 				.then((res) => res.json())
 				.then((user) => {
-					let firstName = user[0].first_name.toLowerCase();
-					firstName = firstName[0].toUpperCase() + firstName.substr(1);
+					let firstName = user.first_name.toLowerCase();
+					firstName = firstName.charAt(0).toUpperCase() + firstName.substr(1);
 					setFirstName(firstName);
 				})
 				.catch((err) => console.error(err));
@@ -62,10 +62,10 @@ export default function Header(props) {
 
 					{!user.isLogged && (
 						<Box sx={{ flex: 1, textAlign: 'end' }}>
-							<Button color='inherit' href='/signup' sx={{fontFamily: "Time new roman"}} >
+							<Button color='inherit' href='/signup' sx={{ fontFamily: 'Time new roman' }}>
 								INSCRIPTION
 							</Button>
-							<Button color='inherit' href='/login' sx={{fontFamily: "Time new roman"}}>
+							<Button color='inherit' href='/login' sx={{ fontFamily: 'Time new roman' }}>
 								CONNEXION
 							</Button>
 						</Box>
