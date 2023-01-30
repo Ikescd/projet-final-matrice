@@ -53,7 +53,7 @@ export default function Header(props) {
 
 					{user.isLogged && (
 						<Box sx={{ display: 'flex', marginLeft: 'auto' }}>
-							<Link href='/profile'>
+							<Link onClick={() => alert('Fonctionnalité à venir, stay tuned!')}>
 								<Typography sx={{ margin: '0 15px', color: 'white' }}>{firstName}</Typography>
 							</Link>
 							<Link href='/cart'>

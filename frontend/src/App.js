@@ -24,18 +24,18 @@ function App() {
 
 						<Route path='/login' element={<Login />} />
 						<Route path='/signup' element={<SignUp />} />
-						<Route path='/passwordReset' element={<UnderConstruction />} />
+						<Route path='/passwordReset' element={<NotFound />} />
 
-						<Route path='/profile' element={<UnderConstruction />} />
+						<Route path='/profile' element={<NotFound />} />
 
 						<Route path='/products' element={<Products />} />
 						<Route path='/products/:id' element={<ProductDetails />} />
 						<Route path='/categories/:id' element={<CategoryDetails />} />
 
 						<Route path='/cart' element={<Cart />} />
-						<Route path='/to-order' element={<UnderConstruction />} />
-						<Route path='/orders' element={<UnderConstruction />} />
-						<Route path='/orders/:id' element={<UnderConstruction />} />
+						<Route path='/to-order' element={<NotFound />} />
+						<Route path='/orders' element={<NotFound />} />
+						<Route path='/orders/:id' element={<NotFound />} />
 
 						<Route path='/404' element={<NotFound />} />
 						<Route path='*' element={<Navigate to='/404' replace />} />

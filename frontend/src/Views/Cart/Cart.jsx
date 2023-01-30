@@ -89,11 +89,25 @@ function Cart() {
 
 				{/* Panier chargé, mais vide  */}
 				{!isLoading && cart.length === 0 && (
-					<MUITypo>Il n'y a rien dans votre panier. Voulez-vous faire quelques achats ?</MUITypo>
+					<MUIBox sx={{ display: 'flex', flexDirection: 'column', margin: 'auto' }}>
+						<MUITypo>Il n'y a rien dans votre panier. Voulez-vous faire quelques achats ?</MUITypo>
+						<MUIButton
+							variant='contained'
+							sx={{
+								marginTop: 5,
+								backgroundColor: '#117A5D',
+								color: 'white',
+								':hover': { backgroundColor: '#117A5D' },
+							}}
+							onClick={() => (window.location.href = '/')}
+						>
+							Faire quelques emplettes
+						</MUIButton>
+					</MUIBox>
 				)}
 
 				{/* Panier chargé et non-vide  */}
-				{!isLoading && (
+				{!isLoading && cart.length >= 1 && (
 					<>
 						<CartList cart={cart} onUpdate={updateProduct} onRemove={removeProduct} />
 

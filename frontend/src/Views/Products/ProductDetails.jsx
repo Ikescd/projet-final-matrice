@@ -5,6 +5,11 @@ import { Box, Button, Grid, Link, Modal, TextField, Typography } from '@mui/mate
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 
 export default function ProductDetails() {
+	const [user, setUser] = useState(() => {
+		const localUser = localStorage.getItem('user');
+		return localUser ? JSON.parse(localUser) : { id: null, isLogged: false };
+	});
+
 	const [product, setProduct] = useState([]);
 	const params = useParams();
 	const [quantity, setQuantity] = useState(1);
@@ -143,14 +148,16 @@ export default function ProductDetails() {
 						}}
 					/>
 
-					<Button
-						sx={styleButton}
-						variant='contained'
-						name={product.id}
-						onClick={() => addProductToCart(product.id)}
-					>
-						Ajouter au panier
-					</Button>
+					{user.isLogged && (
+						<Button
+							sx={styleButton}
+							variant='contained'
+							name={product.id}
+							onClick={() => addProductToCart(product.id)}
+						>
+							Ajouter au panier
+						</Button>
+					)}
 				</Box>
 			</Box>
 
