@@ -6,7 +6,11 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import logo from '../../Assets/logo.png';
 
 export default function Header(props) {
-	const { user } = useContext(UserContext);
+	//const { user } = useContext(UserContext);
+	const [user, setUser] = useState(() => {
+		const localUser = localStorage.getItem('user');
+		return localUser ? JSON.parse(localUser) : { id: null, isLogged: false };
+	});
 	const [firstName, setFirstName] = useState();
 
 	useEffect(() => {
@@ -24,6 +28,7 @@ export default function Header(props) {
 
 	const handleLogout = () => {
 		localStorage.removeItem('token');
+		localStorage.removeItem('user');
 		window.location.href = '/';
 	};
 

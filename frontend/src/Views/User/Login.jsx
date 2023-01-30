@@ -32,14 +32,11 @@ export default function Login() {
 			.then((response) => response.json())
 			.then((data) => {
 				localStorage.setItem('token', data.token);
+				localStorage.setItem('user', JSON.stringify({ id: data.user.id, isLogged: true }));
 				setUser({ isLogged: true, id: data.user.id });
-				setRedirect(true);
+				window.location.href = '/';
 			});
 	};
-
-	if (redirect) {
-		return <Navigate to='/' />;
-	}
 
 	return (
 		<Box

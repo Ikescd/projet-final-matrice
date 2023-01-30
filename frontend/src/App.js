@@ -20,14 +20,7 @@ function App() {
 			<UserProvider>
 				<Layout>
 					<Routes>
-						<Route
-							path='/'
-							element={
-								<RequireAuth withAuth={false}>
-									<Homepage />
-								</RequireAuth>
-							}
-						></Route>
+						<Route path='/' element={<Homepage />}></Route>
 
 						<Route path='/login' element={<Login />} />
 						<Route path='/signup' element={<SignUp />} />
