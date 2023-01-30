@@ -8,19 +8,26 @@ function usersRoutes(app, connection) {
 	const secretKey = process.env.SECRET_KEY;
 	//Create new user
 	app.post('/api/users/add', async (req, res) => {
-		const hash = await bcrypt.hash(req.body.password, 10);
+		if (req.body.first_name && req.body.last_name && req.body.email && req.body.password) {
+			const hash = await bcrypt.hash(req.body.password, 10);
 
-		const first_name = req.body.first_name;
-		const last_name = req.body.last_name;
-		const email = req.body.email;
-		const password = hash;
-		const role = 'user';
+			const first_name = req.body.first_name;
+			const last_name = req.body.last_name;
+			const email = req.body.email;
+			const password = hash;
+			const role = 'user';
 
-		const responseDB = await connection.query(
-			'INSERT INTO users ( first_name, last_name, email, password, role) VALUES (?,?,?,?,?)',
-			[first_name, last_name, email, password, role]
-		);
-		res.status(200).send(responseDB);
+			const responseDB = await connection.query(
+				'INSERT INTO users ( first_name, last_name, email, password, role) VALUES (?,?,?,?,?)',
+				[first_name, last_name, email, password, role],
+				(err, result) => {
+					if (err) throw err;
+					res.json({ status: 200, result });
+				}
+			);
+		} else {
+			res.sendStatus(422);
+		}
 	});
 
 	app.post('/api/users/login', async (req, res) => {
