@@ -116,7 +116,10 @@ function Cart() {
 						</MUITypo>
 
 						<DOMLink
-							to='/to-order'
+							// to='/to-order'
+							onClick={() => {
+								alert(`Vous avez commandé pour un total de : ${totalCart / 100} €.`);
+							}}
 							state={{ products: productsInCart, total: totalCart }}
 							style={{
 								textDecoration: 'none',
