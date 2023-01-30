@@ -114,9 +114,11 @@ export default function SignUp() {
                   sx={{ 
                     margin: "10px 0 5px 0",
                     label: {color: "#117A5D", fontFamily: "Time new roman"},
-                    input: {color: "#117A5D", fontFamily: "Time new roman"},
-                    fielset: {color: "#117A5D"}
+                    input: {color: "#117A5D", fontFamily: "Time new roman", borderColor: "#117A5D"},
+                    fielset: {color: "#117A5D"},
                    }}
+                  color="success"
+
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -133,6 +135,8 @@ export default function SignUp() {
                     input: {color: "#117A5D", fontFamily: "Time new roman"},
                     fielset: {color: "#117A5D"}
                    }}
+                   color="success"
+
                 />
               </Grid>
               <Grid item xs={12}>
@@ -149,6 +153,8 @@ export default function SignUp() {
                     input: {color: "#117A5D", fontFamily: "Time new roman"},
                     fielset: {color: "#117A5D"}
                    }}
+                   color="success"
+                   
                 />
               </Grid>
               <Grid item xs={12}>
@@ -166,6 +172,8 @@ export default function SignUp() {
                     input: {color: "#117A5D", fontFamily: "Time new roman"},
                     fielset: {color: "#117A5D"}
                    }}
+                   color="success"
+
                 />
               </Grid>
               <Grid item xs={12}>
@@ -183,6 +191,7 @@ export default function SignUp() {
                     input: {color: "#117A5D", fontFamily: "Time new roman"},
                     fielset: {color: "#117A5D"}
                    }}
+                   color="success"
                 />
               </Grid>
             </Grid>

@@ -32,7 +32,6 @@ function usersRoutes(app, connection) {
 		// verify the user
 		await connection.query('SELECT * FROM users WHERE email = ? ', [email], (err, result) => {
 			let user = result[0];
-			console.log('dans le login backend');
 			if (!user) {
 				return res.status(401).send({ message: 'Invalid email' });
 			}
@@ -41,21 +40,22 @@ function usersRoutes(app, connection) {
 					return res.status(401).json({ message: 'Invalid password' });
 				}
 				const token = jwt.sign({ id: user.id }, secretKey, { expiresIn: '24h' });
-				res.json({ status: 200, token: token, user: user });
+				res.json({ status: 200, token, user: user });
 			});
 		});
 	});
 
-	app.get('/api/login/checkToken', withAuth, async (req, res) => {
-		const id = req.body.id;
-
-		await connection.query('SELECT * FROM users WHERE id = ? ', [id], (err, result) => {
-			let user = result[0];
-			if (user === null || user === undefined)
-				return res.status(400).send({ message: 'User not found' });
-			else res.status(200).json({ message: 'token ok', user: user });
-		});
-	});
+	app.get(
+		'/api/login/checkToken',
+		/*withAuth,*/ async (req, res) => {
+			const id = req.params.id;
+			await connection.query('SELECT * FROM users WHERE id = ? ', [id], (err, result) => {
+				let user = result[0];
+				if (user === null || user === undefined) return res.status(400).send('User not found');
+				else res.status(200).json({ message: 'token ok', user: user });
+			});
+		}
+	);
 
 	//Read all users
 	app.get('/api/users', (req, res) => {
@@ -73,6 +73,7 @@ function usersRoutes(app, connection) {
 			let user = result[0];
 			if (user === null || user === undefined) return res.status(400).send('User not found');
 			else {
+				console.log(user.id);
 				res.status(200).send(user);
 			}
 		});
