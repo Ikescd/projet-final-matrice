@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProductDetails from './Views/Products/ProductDetails';
 import Products from './Views/Products/Products';
 import Layout from './Components/Layout';
@@ -12,7 +12,6 @@ import { Box } from '@mui/material';
 import Login from './Views/User/Login';
 import SignUp from './Views/User/SignUp';
 import UserProvider from './Context/UserContext';
-import RequireAuth from './Helpers/RequireAuth';
 
 function App() {
   return (
