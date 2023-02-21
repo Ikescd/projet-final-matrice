@@ -15,58 +15,50 @@ import UserProvider from './Context/UserContext';
 import RequireAuth from './Helpers/RequireAuth';
 
 function App() {
-	return (
-		<Router>
-			<UserProvider>
-				<Layout>
-					<Routes>
-						<Route path='/' element={<Homepage />}></Route>
+  return (
+    <Router>
+      <UserProvider>
+        <Layout>
+          <Routes>
+            <Route path='/' element={<Homepage />}></Route>
 
-						<Route path='/login' element={<Login />} />
-						<Route path='/signup' element={<SignUp />} />
-						<Route path='/passwordReset' element={<NotFound />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<SignUp />} />
+            <Route path='/passwordReset' element={<NotFound />} />
 
-						<Route path='/profile' element={<NotFound />} />
+            <Route path='/profile' element={<NotFound />} />
 
-						<Route path='/products' element={<Products />} />
-						<Route path='/products/:id' element={<ProductDetails />} />
-						<Route path='/categories/:id' element={<CategoryDetails />} />
+            <Route path='/products' element={<Products />} />
+            <Route path='/products/:id' element={<ProductDetails />} />
+            <Route path='/categories/:id' element={<CategoryDetails />} />
 
-						<Route path='/cart' element={<Cart />} />
-						<Route path='/to-order' element={<NotFound />} />
-						<Route path='/orders' element={<NotFound />} />
-						<Route path='/orders/:id' element={<NotFound />} />
+            <Route path='/cart' element={<Cart />} />
+            <Route path='/to-order' element={<NotFound />} />
+            <Route path='/orders' element={<NotFound />} />
+            <Route path='/orders/:id' element={<NotFound />} />
 
-						<Route path='/404' element={<NotFound />} />
-						<Route path='*' element={<Navigate to='/404' replace />} />
-					</Routes>
-				</Layout>
-			</UserProvider>
-		</Router>
-	);
+            <Route path='/404' element={<NotFound />} />
+            {/* <Route path='*' element={<Navigate to='/404' replace />} /> */}
+          </Routes>
+        </Layout>
+      </UserProvider>
+    </Router>
+  );
 }
 
-const UnderConstruction = () => {
-	return (
-		<>
-			<p>Site en construction, revenez plus tard.</p>
-			<a href='/'>Retour à l'accueil</a>
-		</>
-	);
-};
 
 const NotFound = () => {
-	return <>Page not found !</>;
+  return <>Page not found !</>;
 };
 
 const Homepage = () => {
-	return (
-		<Box sx={{ display: 'flex', flexDirection: 'column', width: '90%', margin: 'auto' }}>
-			<TopSection />
-			<Categories />
-			<Products />
-		</Box>
-	);
+  return (
+    <Box sx={{ display: 'flex', flexDirection: 'column', width: '90%', margin: 'auto' }}>
+      <TopSection />
+      <Categories />
+      <Products />
+    </Box>
+  );
 };
 
 export default App;
