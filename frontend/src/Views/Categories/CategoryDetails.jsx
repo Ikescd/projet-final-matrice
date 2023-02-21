@@ -107,49 +107,54 @@ export default function CategoryDetails() {
   ));
 
   return (
-    <Box>
-      <Link
-        component={RouterLink}
-        to={"/"}
-        underline="none"
-        color="text.primary"
-      >
-        <Grid container direction="row" alignItems="center">
-          <Grid sx={{ mr: 2 }}>
-            <ArrowCircleLeftIcon />
+    <>
+      {categoryName === undefined &&
+        <Typography sx={{ margin: "auto" }}>Cette catégorie n'existe pas, retournez à <RouterLink to="/">l'accueil</RouterLink> !</Typography>
+      }
+      {categoryName !== undefined && <Box>
+        <Link
+          component={RouterLink}
+          to={"/"}
+          underline="none"
+          color="text.primary"
+        >
+          <Grid container direction="row" alignItems="center">
+            <Grid sx={{ mr: 2 }}>
+              <ArrowCircleLeftIcon />
+            </Grid>
+            <Grid>
+              <Typography sx={{ color: "#117A5D", fontFamily: "Time new roman" }}>
+                Retour à l'accueil
+              </Typography>
+            </Grid>
           </Grid>
-          <Grid>
-            <Typography sx={{ color: "#117A5D", fontFamily: "Time new roman" }}>
-              Retour à l'accueil
-            </Typography>
-          </Grid>
-        </Grid>
-      </Link>
-      <Typography
-        variant="h4"
-        sx={{ color: "#117A5D", fontFamily: "Time new roman", margin: 2 }}
-      >
-        Nos {categoryName}
-      </Typography>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          justifyContent: "center",
-        }}
-      >
-        {productsByCategory == false ? emptyCategory : listOfProducts}
-      </Box>
-      <TablePagination
-        sx={{ mx: "auto" }}
-        component="div"
-        count={productsByCategory.length}
-        page={page}
-        onPageChange={handleChangePage}
-        rowsPerPage={rowsPerPage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Box>
+        </Link>
+        <Typography
+          variant="h4"
+          sx={{ color: "#117A5D", fontFamily: "Time new roman", margin: 2 }}
+        >
+          Nos {categoryName}
+        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
+          {productsByCategory === false ? emptyCategory : listOfProducts}
+        </Box>
+        <TablePagination
+          sx={{ mx: "auto" }}
+          component="div"
+          count={productsByCategory.length}
+          page={page}
+          onPageChange={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </Box>}
+    </>
   );
 }

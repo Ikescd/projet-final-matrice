@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import ProductDetails from './Views/Products/ProductDetails';
 import Products from './Views/Products/Products';
 import Layout from './Components/Layout';
@@ -37,7 +37,7 @@ function App() {
             <Route path='/orders/:id' element={<NotFound />} />
 
             <Route path='/404' element={<NotFound />} />
-            {/* <Route path='*' element={<Navigate to='/404' replace />} /> */}
+            <Route path='*' element={<Navigate to='/404' replace />} />
           </Routes>
         </Layout>
       </UserProvider>
