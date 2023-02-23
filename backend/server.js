@@ -9,7 +9,6 @@ const cors = require('cors');
 const indexesRoutes = require('./routes/indexesRoutes')
 
 
-
 const corsOptions = {
   origin: '*',
   credentials: true,
@@ -29,7 +28,8 @@ const connectionOptions = {
   database: 'recycle_rat',
   user: 'root',
   password: process.env.DB_PASSWORD,
-  // port: process.env.DB_PORT
+  // cristiano, il me semble que tu as besoin du port de ton côté ! donc décommente ^^ 
+  port: process.env.DB_PORT 
 };
 
 const connection = mysql.createConnection(connectionOptions);
@@ -42,6 +42,8 @@ app.get('/', (req, res) => {
 indexesRoutes(app, connection)
 
 
-app.listen(port, () => {
-  console.log(`bien connecté au port ${port}`);
-});
+app.listen(3000, () => {
+  console.log("On the port: " + port)
+})
+
+
