@@ -5,6 +5,8 @@ const cors = require('cors');
 const { app } = require('./app')
 const indexesRoutes = require('./routes/indexesRoutes')
 
+const port = process.env.PORT || 3000;
+
 const corsOptions = {
   origin: '*',
   credentials: true,
@@ -27,7 +29,7 @@ connection.connect();
 
 indexesRoutes(app, connection)
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log("On the port: " + port)
 })
 
