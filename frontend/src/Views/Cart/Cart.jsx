@@ -16,12 +16,7 @@ function Cart() {
     const localCart = localStorage.getItem('cart');
     return localCart
       ? JSON.parse(localCart)
-      : [
-        /* Uncomment to add a dummy cart */
-        // { product_id: 1, quantity: 2 },
-        // { product_id: 5, quantity: 1 },
-        // { product_id: 8, quantity: 1 },
-      ];
+      : [];
   });
   const [isLoading, setIsLoading] = useState(true);
   const [totalCart, setTotalCart] = useState([]);
