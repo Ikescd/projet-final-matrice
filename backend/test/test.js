@@ -14,39 +14,34 @@ const connectionOptions = {
 };
 const connection = mysql.createConnection(connectionOptions);
 
-describe("test block", () => {
-  beforeAll(() => {
-    connection.connect();
-    indexesRoutes(app, connection);
-  });
+beforeAll(() => {
+  connection.connect();
+  indexesRoutes(app, connection);
+});
 
-  afterAll((done) => {
-    connection.query("DROP TABLE IF EXISTS addresses");
-    connection.query("DROP TABLE IF EXISTS productsinorder");
-    connection.query("DROP TABLE IF EXISTS products");
-    connection.query("DROP TABLE IF EXISTS orders");
-    connection.query("DROP TABLE IF EXISTS categories");
-    connection.query("DROP TABLE IF EXISTS users");
+afterAll((done) => {
+  connection.query("DROP TABLE IF EXISTS addresses");
+  connection.query("DROP TABLE IF EXISTS productsinorder");
+  connection.query("DROP TABLE IF EXISTS products");
+  connection.query("DROP TABLE IF EXISTS orders");
+  connection.query("DROP TABLE IF EXISTS categories");
+  connection.query("DROP TABLE IF EXISTS users");
 
-    connection.query(createTable.addresses);
-    connection.query(createTable.products);
-    connection.query(createTable.users);
-    connection.query(createTable.productsinorder);
-    connection.query(createTable.orders);
-    connection.query(createTable.categories);
+  connection.query(createTable.addresses);
+  connection.query(createTable.products);
+  connection.query(createTable.users);
+  connection.query(createTable.productsinorder);
+  connection.query(createTable.orders);
+  connection.query(createTable.categories);
 
-    connection.query(fillTable.categories);
-    connection.query(fillTable.products);
+  connection.query(fillTable.categories);
+  connection.query(fillTable.products);
 
-    connection.end(done);
-    // mongoDB.disconnect(done);
-  });
+  connection.end(done);
+  // mongoDB.disconnect(done);
+});
 
-  test("get users", async () => {
-    const responseGET = await request(app).get("/api/users");
-    expect(responseGET.status).toEqual(200);
-  });
-
+describe("test Categories", () => {
   test("get categories", async () => {
     const responseGET = await request(app).get("/api/categories");
     expect(responseGET.status).toEqual(200);
@@ -128,6 +123,149 @@ describe("test block", () => {
         id: 5,
         name: "Animaux",
         picture: "https://picsum.photos/id/237/200/300",
+      },
+    ]);
+  });
+});
+
+describe("test Products", () => {
+  test("get all products", async () => {
+    const responseGET = await request(app).get("/api/products");
+    expect(responseGET.status).toEqual(200);
+    expect(responseGET).toHaveProperty("_body", [
+      {
+        category_id: 3,
+        description:
+          "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi repellendus excepturi porro cum sit, voluptatibus quo blanditiis saepe nam commodi eaque necessitatibus dicta itaque facilis.",
+        id: 1,
+        item_code: null,
+        name: "Meuble TV en bois recyclé",
+        picture:
+          "https://www.trendymobilier.com/app/uploads/2020/07/55365-Meuble-TV-vintage-en-bois-recycle.jpg",
+        price: 23050,
+        quantityInStock: 4,
+      },
+      {
+        category_id: 2,
+        description:
+          "LE JOUET qui accompagne les carnets de voyage ! Dans chaque magazine, vos enfants suivent les aventure des petits Duchemin, et ils adorent…",
+        id: 2,
+        item_code: null,
+        name: "Jouet Van et figurines en plastique recyclé",
+        picture:
+          "https://lacartefrancaise.fr//wp-content/uploads/2022/10/jouet-van-plastique-recycle-1-600x437.jpg",
+        price: 1500,
+        quantityInStock: 10,
+      },
+      {
+        category_id: 3,
+        description:
+          "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi repellendus excepturi porro cum sit, voluptatibus quo blanditiis saepe nam commodi eaque necessitatibus dicta itaque facilis.",
+        id: 3,
+        item_code: "123",
+        name: "Tabouret",
+        picture:
+          "https://cdn.tiptoe.fr/wp-content/uploads/2019/06/LOU-CHENE-MASSIF-NOIR-V2.jpg?twic=v1/resize=270",
+        price: 4000,
+        quantityInStock: 8,
+      },
+      {
+        category_id: 3,
+        description:
+          "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi repellendus excepturi porro cum sit, voluptatibus quo blanditiis saepe nam commodi eaque necessitatibus dicta itaque facilis.",
+        id: 4,
+        item_code: "123",
+        name: "Tabouret",
+        picture:
+          "https://cdn.tiptoe.fr/wp-content/uploads/2019/06/LOU-CHENE-MASSIF-NOIR-V2.jpg?twic=v1/resize=270",
+        price: 4000,
+        quantityInStock: 8,
+      },
+      {
+        category_id: 3,
+        description:
+          "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi repellendus excepturi porro cum sit, voluptatibus quo blanditiis saepe nam commodi eaque necessitatibus dicta itaque facilis.",
+        id: 5,
+        item_code: "123",
+        name: "Tabouret bas",
+        picture:
+          "https://meuble-passion.com/8219-large_default/tabouret-bois-de-bateau-recycle-truckwood-50cm.jpg",
+        price: 3000,
+        quantityInStock: 8,
+      },
+      {
+        category_id: 3,
+        description:
+          "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi repellendus excepturi porro cum sit, voluptatibus quo blanditiis saepe nam commodi eaque necessitatibus dicta itaque facilis.",
+        id: 6,
+        item_code: null,
+        name: "Fauteuil recyclé",
+        picture:
+          "https://www.designferia.com/sites/default/files/styles/article_images__s640_/public/field/image/anciens-pneus-objets-recycles-jardin.jpg",
+        price: 5000,
+        quantityInStock: 6,
+      },
+      {
+        category_id: 4,
+        description:
+          "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi repellendus excepturi porro cum sit, voluptatibus quo blanditiis saepe nam commodi eaque necessitatibus dicta itaque facilis.",
+        id: 7,
+        item_code: null,
+        name: "Bougie",
+        picture:
+          "https://www.cdixvins.fr/cache/2/f/e/6/6/2fe66854a9e777f90665f5f944c6fdcfe00eb6f5.png",
+        price: 999,
+        quantityInStock: 19,
+      },
+    ]);
+  });
+
+  test("get a product", async () => {
+    const responseGET = await request(app).get("/api/products/7");
+    expect(responseGET.status).toEqual(200);
+    expect(responseGET).toHaveProperty("_body", [
+      {
+        category_id: 4,
+        description:
+          "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi repellendus excepturi porro cum sit, voluptatibus quo blanditiis saepe nam commodi eaque necessitatibus dicta itaque facilis.",
+        id: 7,
+        item_code: null,
+        name: "Bougie",
+        picture:
+          "https://www.cdixvins.fr/cache/2/f/e/6/6/2fe66854a9e777f90665f5f944c6fdcfe00eb6f5.png",
+        price: 999,
+        quantityInStock: 19,
+      },
+    ]);
+  });
+
+  test("post a new product and get it", async () => {
+    const bodyData = {
+      name: "Nanimal",
+      picture: "https://picsum.photos/id/237/200/300",
+      description: "Lorem, ipsum dolor sit amet consectetur adipisicin",
+      price: 5999,
+      quantityInStock: 42,
+      category: 2,
+    };
+
+    const responsePOST = await request(app)
+      .post("/api/products")
+      .send(bodyData);
+    expect(responsePOST.status).toEqual(200);
+
+    const responseGET = await request(app).get("/api/products/8");
+    expect(responseGET.status).toEqual(200);
+    expect(responseGET).toHaveProperty("_body", [
+      {
+        category_id: 2,
+        description: "Lorem, ipsum dolor sit amet consectetur adipisicin",
+        id: 8,
+        item_code: null,
+        name: "Nanimal",
+        picture: "https://picsum.photos/id/237/200/300",
+        price: 5999,
+        quantityInStock: 42,
       },
     ]);
   });
