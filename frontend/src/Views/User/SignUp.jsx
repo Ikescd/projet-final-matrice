@@ -1,6 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import { FormField } from './FormField';
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -100,94 +101,7 @@ export default function SignUp() {
 					</Typography>
 					<Box component='form' noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
 						<Grid container spacing={2}>
-							<Grid item xs={12} sm={6}>
-								<TextField
-									autoComplete='given-name'
-									name='firstName'
-									required
-									fullWidth
-									id='firstName'
-									label='Prénom'
-									autoFocus
-									sx={{
-										margin: '10px 0 5px 0',
-										label: { color: '#117A5D', fontFamily: 'Time new roman' },
-										input: { color: '#117A5D', fontFamily: 'Time new roman', borderColor: '#117A5D' },
-										fielset: { color: '#117A5D' },
-									}}
-									color='success'
-								/>
-							</Grid>
-							<Grid item xs={12} sm={6}>
-								<TextField
-									required
-									fullWidth
-									id='lastName'
-									label='Nom'
-									name='lastName'
-									autoComplete='family-name'
-									sx={{
-										margin: '10px 0 5px 0',
-										label: { color: '#117A5D', fontFamily: 'Time new roman' },
-										input: { color: '#117A5D', fontFamily: 'Time new roman' },
-										fielset: { color: '#117A5D' },
-									}}
-									color='success'
-								/>
-							</Grid>
-							<Grid item xs={12}>
-								<TextField
-									required
-									fullWidth
-									id='email'
-									label='Email'
-									name='email'
-									autoComplete='email'
-									sx={{
-										margin: '10px 0 5px 0',
-										label: { color: '#117A5D', fontFamily: 'Time new roman' },
-										input: { color: '#117A5D', fontFamily: 'Time new roman' },
-										fielset: { color: '#117A5D' },
-									}}
-									color='success'
-								/>
-							</Grid>
-							<Grid item xs={12}>
-								<TextField
-									required
-									fullWidth
-									name='password'
-									label='Mot de passe'
-									type='password'
-									id='password'
-									autoComplete='new-password'
-									sx={{
-										margin: '10px 0 5px 0',
-										label: { color: '#117A5D', fontFamily: 'Time new roman' },
-										input: { color: '#117A5D', fontFamily: 'Time new roman' },
-										fielset: { color: '#117A5D' },
-									}}
-									color='success'
-								/>
-							</Grid>
-							<Grid item xs={12}>
-								<TextField
-									required
-									fullWidth
-									name='confirm_password'
-									label='Confirmer votre mot de passe'
-									type='password'
-									id='confirm_password'
-									autoComplete='new-password'
-									sx={{
-										margin: '10px 0 5px 0',
-										label: { color: '#117A5D', fontFamily: 'Time new roman' },
-										input: { color: '#117A5D', fontFamily: 'Time new roman' },
-										fielset: { color: '#117A5D' },
-									}}
-									color='success'
-								/>
-							</Grid>
+							<FormField/>							
 						</Grid>
 						<Button
 							type='submit'
