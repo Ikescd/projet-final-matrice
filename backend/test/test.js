@@ -38,14 +38,14 @@ afterAll((done) => {
 describe('users routes', () => {
 
   test("POST /api/users/add OK", async () => {
-    const responsePOSTUser1 = await request(app).post("/api/users/add").send({
+    const user1 = await request(app).post("/api/users/add").send({
       first_name: "dede",
       last_name: "dede",
       email: "dede@dede.com",
       password: "dede",
       role: "user"
     })
-    const responsePOSTUser2 = await request(app).post("/api/users/add").send({
+    const user2 = await request(app).post("/api/users/add").send({
       first_name: "dede",
       last_name: "dede",
       email: "dede@lol.com",
@@ -55,8 +55,14 @@ describe('users routes', () => {
 
     const responsePOSTNEWUser = await request(app).post("/api/users/add").send({ first_name: "dede", last_name: "dede", email: "test@test.com", password: "dede", role: "user" })
 
-
     expect(responsePOSTNEWUser.body.result.insertId).toEqual(3)
+  })
+
+  test("POST /api/users/add FAIL (email already used)", async () => {
+    const responsePOST = await request(app).post("/api/users/add").send({ first_name: "dede", last_name: "dede", email: "test@test.com", password: "dede", role: "user" })
+
+
+    expect(responsePOST.status).toEqual(400)
   })
 
   test("POST /api/users/add FAIL (incomplete body)", async () => {
@@ -79,9 +85,17 @@ describe('users routes', () => {
     expect(responsePOST.text).toEqual("{\"message\":\"Invalid password\"}")
   })
 
-  test("GET /api/login/checkToken", async () => {
-    const responseGET = await request(app).get("/api/login/checkToken")
-    expect(responseGET.body).toEqual()
+  test("GET /api/login/checkToken OK token", async () => {
+    const responsePOST = await request(app).post("/api/users/login").send({ email: "dede@dede.com", password: "dede" });
+    const token = responsePOST.body.token;
+
+    const responseGET = await request(app).get("/api/login/checkToken").set("authorization", "Bearer " + token)
+    expect(responseGET.status).toEqual(200)
+  })
+
+  test("GET /api/login/checkToken BAD token", async () => {
+    const responseGET = await request(app).get("/api/login/checkToken").set("authorization", "Bearer dede")
+    expect(responseGET.text).toEqual("{\"status\":401,\"msg\":\"wrong token\"}")
   })
 
   test("GET /api/users", async () => {

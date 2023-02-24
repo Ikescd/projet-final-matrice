@@ -21,8 +21,12 @@ function usersRoutes(app, connection) {
         'INSERT INTO users ( first_name, last_name, email, password, role) VALUES (?,?,?,?,?)',
         [first_name, last_name, email, password, role],
         (err, result) => {
-          if (err) throw err;
-          res.json({ status: 200, result });
+          if (err) {
+            res.status(400).json({ err })
+          }
+          else {
+            res.json({ status: 200, result });
+          }
         }
       );
     } else {
@@ -33,7 +37,6 @@ function usersRoutes(app, connection) {
   app.post('/api/users/login', async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-
 
     const user = await connection.query('SELECT * from users WHERE email=?', [req.body.email]);
 

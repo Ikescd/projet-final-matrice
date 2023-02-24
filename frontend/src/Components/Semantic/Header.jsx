@@ -11,10 +11,10 @@ export default function Header(props) {
   // 	const localUser = localStorage.getItem('user');
   // 	return localUser ? JSON.parse(localUser) : { id: null, isLogged: false };
   // });
+  console.log(user)
   const [firstName, setFirstName] = useState();
-
   useEffect(() => {
-    if (user.id !== null) {
+    if (user.id !== null && user.id !== 0 && user.id !== undefined) {
       fetch('http://localhost:3000/api/users/' + user.id)
         .then((res) => res.json())
         .then((user) => {
