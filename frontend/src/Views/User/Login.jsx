@@ -72,6 +72,7 @@ export default function Login() {
       <FormControl>
         <Grid item xs={12}>
         <TextField
+          autoFocus
           id="outlined-basic"
           label="Email address"
           name="email"
@@ -126,7 +127,7 @@ export default function Login() {
         </Button>
       </FormControl>
       <Link href="/passwordReset" sx={{ color: "#117A5D" }}>Mot de passe oublié ?</Link>
-      <Link href="/register" sx={{ color: "#117A5D" }}>Pas encore de compte ? Inscrivez-vous</Link>
+      <Link href="/signup" sx={{ color: "#117A5D" }}>Pas encore de compte ? Inscrivez-vous</Link>
     </Box>
   );
 }

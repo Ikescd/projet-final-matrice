@@ -3,7 +3,6 @@ export const dataField = [
     id:"firstName",
     label:"Prénom",
     name:"firstName",
-    // autoFocus,
     autoComplete:"given-name",
     },
     {
