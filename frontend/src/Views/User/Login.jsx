@@ -7,6 +7,7 @@ import {
   Button,
   Typography,
   Link,
+  Grid
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { UserContext } from "../../Context/UserContext";
@@ -69,6 +70,7 @@ export default function Login() {
       <Typography variant="h6" sx={{ color: "#117A5D", fontFamily: "Time new roman" }}>Connexion</Typography>
 
       <FormControl>
+        <Grid item xs={12}>
         <TextField
           id="outlined-basic"
           label="Email address"
@@ -81,9 +83,12 @@ export default function Login() {
             input: { color: "#117A5D", fontFamily: "Time new roman" },
             fielset: { color: "#117A5D" }
           }}
+          color='success'
           onChange={handleChange}
           required
         />
+        </Grid>
+        <Grid item xs={12}>
         <TextField
           id="outlined-basic"
           label="Password"
@@ -92,14 +97,16 @@ export default function Login() {
           name="password"
           helperText=""
           sx={{
-            margin: "5px 0 10px 0",
+            margin: "10px 0 5px 0",
             label: { color: "#117A5D", fontFamily: "Time new roman" },
             input: { color: "#117A5D", fontFamily: "Time new roman" },
             fielset: { color: "#117A5D" },
           }}
+          color='success'
           onChange={handleChange}
           required
         />
+        </Grid>
         <Button
           onClick={handleSubmit}
           variant="contained"

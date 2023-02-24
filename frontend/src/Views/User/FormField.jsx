@@ -11,6 +11,7 @@ export const FormField = () => {
                 return(
                     <Grid item xs={12} sm={data.id === "firstName" || data.id === "lastName" ? 6 : 12} key={"grid_" + key}>
                          <TextField 
+                            autoFocus={key === 0 ? true : false}
                             required
                             fullWidth                           
                             key={key}
